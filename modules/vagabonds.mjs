@@ -6,7 +6,7 @@ import { VagabondsActorSheet } from "./sheets/actor-sheet.mjs";
 import { VagabondsItemSheet } from "./sheets/item-sheet.mjs";
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
-import { BOILERPLATE } from "./helpers/config.mjs";
+import { VAGABONDS } from "./helpers/config.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -16,14 +16,14 @@ Hooks.once('init', async function () {
 
     // Add utility classes to the global game object so that they're more easily
     // accessible in global contexts.
-    game.boilerplate = {
+    game.vagabonds = {
         VagabondsActor,
         VagabondsItem,
         rollItemMacro
     };
 
     // Add custom constants for configuration.
-    CONFIG.BOILERPLATE = BOILERPLATE;
+    CONFIG.VAGABONDS = VAGABONDS;
 
     /**
      * Set an initiative formula for the system
@@ -97,7 +97,7 @@ async function createItemMacro(data, slot) {
     const item = await Item.fromDropData(data);
 
     // Create the macro command using the uuid.
-    const command = `game.boilerplate.rollItemMacro("${data.uuid}");`;
+    const command = `game.vagabonds.rollItemMacro("${data.uuid}");`;
     let macro = game.macros.find(m => (m.name === item.name) && (m.command === command));
     if (!macro) {
         macro = await Macro.create({
@@ -105,7 +105,7 @@ async function createItemMacro(data, slot) {
             type: "script",
             img: item.img,
             command: command,
-            flags: { "boilerplate.itemMacro": true }
+            flags: { "vagabonds.itemMacro": true }
         });
     }
     game.user.assignHotbarMacro(macro, slot);
@@ -134,3 +134,4 @@ function rollItemMacro(itemUuid) {
         // Trigger the item roll
         item.roll();
     });
+}

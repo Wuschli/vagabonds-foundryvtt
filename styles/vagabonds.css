@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&display=swap');
+
+.vagabonds.window-app .window-content {
+    background: white;
+    font-family: 'IM Fell DW Pica', serif;
+    border-radius: 0;
+    --form-field-height: 16px;
+    --color-bg-option: #ddd;
+}
+
+.vagabonds.sheet .input-group {
+    border-radius: 10px;
+    border: 2px solid #000;
+    overflow: hidden;
+}
+
+.vagabonds.sheet .input-group .input {
+    display: flex;
+    flex-direction: row;
+}
+
+.vagabonds.sheet .input-group .input .label {
+    flex: 1;
+    text-align: center;
+}
+
+.vagabonds.sheet .input-group .input .value {
+    flex: 2;
+}
+
+.vagabonds.sheet .input-group .input.big .label {
+    font-size: 1.5rem;
+}
+
+.vagabonds.sheet .input-group .input.big .value {
+    font-size: 1.5rem;
+}
+
+.vagabonds.sheet .seperatorLine {
+    height: 2px;
+    width: 100%;
+    background: #000;
+}
+
+.vagabonds.sheet input {
+    border: 0;
+    border-radius: 0;
+    background: none;
+    background-color: white;
+    height: auto;
+}
+
+.vagabonds.sheet .label {
+    background-color: var(--color-bg-option);
+    font-weight: bold;
+}
+
+.vagabonds .char-header {
+    display: grid;
+    grid-template-columns: 170px 3fr 100px;
+    grid-template-rows: min-content 1fr;
+    column-gap: 10px;
+    row-gap: 10px;
+    grid-template-areas:
+        "methods description image"
+        "methods fatigue fatigue";
+}
+
+.vagabonds .char-header .methods {
+    grid-area: methods;
+    display: flex;
+    flex-direction: column;
+}
+
+.vagabonds .char-header .method {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    background-color: var(--color-bg-option);
+    padding: 0 0 0 3px;
+}
+
+.vagabonds .char-header .method .method-name {
+    flex: 1;
+}
+
+.vagabonds .char-header .method .value {
+    border: none;
+    flex: 0 0 2em;
+    height: 100%;
+    background-color: #fff;
+    padding: 1px 3px;
+}
+
+.vagabonds .char-header .method .method-used {
+    margin: 0 3px 0 0;
+    width: 15px;
+    flex: none;
+}
+
+.vagabonds .method.attribute {
+    background-color: #000;
+    color: #ddd;
+}
+
+.vagabonds .method.attribute .label {
+    background-color: #000;
+}
+
+.vagabonds .method.attribute .value {
+    background-color: #000;
+}
+
+.vagabonds .char-header .description {
+    grid-area: description;
+}
+
+.vagabonds .char-header .image {
+    grid-area: image;
+    width: 100px;
+    height: auto;
+}
+
+.vagabonds .char-header .fatigue {
+    grid-area: fatigue;
+}
+
+.vagabonds .char-header .attributes {
+    grid-area: attributes;
+}

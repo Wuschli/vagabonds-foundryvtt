@@ -1,0 +1,109 @@
+<form class="{{cssClass}} {{actor.type}}" autocomplete="off">
+
+    {{!-- Sheet Header --}}
+    <header class="char-header">
+
+        <div class="description input-group">
+            <!-- Character name -->
+            <div class="input big">
+                <div class="label">{{localize "VAGABONDS.ActorName"}}</div>
+                <div class="value"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"
+                        style="height: auto;" /></div>
+            </div>
+            <div class="seperatorLine"></div>
+            <!-- Background -->
+            <div class="input">
+                <div class="label">{{localize "VAGABONDS.ActorBackground"}}</div>
+                <div class="value"><input name="system.description.background" type="text"
+                        value="{{system.description.background}}" placeholder="" data-dtype="String" /></div>
+            </div>
+            <div class="seperatorLine"></div>
+            <!-- Physique -->
+            <div class="input">
+                <div class="label">{{localize "VAGABONDS.Physique"}}</div>
+                <div class="value"><input name="system.description.physique" type="text"
+                        value="{{system.description.physique}}" placeholder="" data-dtype="String" /></div>
+            </div>
+            <div class="seperatorLine"></div>
+            <!-- Mark -->
+            <div class="input">
+                <div class="label">{{localize "VAGABONDS.Mark"}}</div>
+                <div class="value"><input name="system.description.mark" type="text" value="{{system.description.mark}}"
+                        placeholder="" data-dtype="String" /></div>
+            </div>
+            <div class="seperatorLine"></div>
+            <!-- Clothes -->
+            <div class="input">
+                <div class="label">{{localize "VAGABONDS.Clothes"}}</div>
+                <div class="value"><input name="system.description.clothes" type="text"
+                        value="{{system.description.clothes}}" placeholder="" data-dtype="String" /></div>
+            </div>
+            <div class="seperatorLine"></div>
+            <!-- Personality -->
+            <div class="input">
+                <div class="label">{{localize "VAGABONDS.Personality"}}</div>
+                <div class="value"><input name="system.description.personality" type="text"
+                        value="{{system.description.personality}}" placeholder="" data-dtype="String" /></div>
+            </div>
+            <div class="seperatorLine"></div>
+            <!-- Motivation -->
+            <div class="input">
+                <div class="label">{{localize "VAGABONDS.Motivation"}}</div>
+                <div class="value"><input name="system.description.motivation" type="text"
+                        value="{{system.description.motivation}}" placeholder="" data-dtype="String" /></div>
+            </div>
+        </div>
+        <!-- Methods -->
+        <div class="methods input-group">
+            {{#each system.attributes}}
+            <div class="method attribute">
+                <div class="method-name label">{{this.label}}</div>
+                <div class="value">{{this.value}}</div>
+            </div>
+                {{#each this.methods}}
+                <div class="method">
+                    <input name="system.methods.{{@key}}.used" class="method-used label" type="checkbox" {{checked
+                        this.used}} />
+                    <div class="method-name label">{{this.label}}</div>
+                    <input name="system.methods.{{@key}}.value" class="value" type="number" value="{{this.value}}"
+                        data-dtype="Number" />
+                </div>
+                {{/each}}
+            {{/each}}
+        </div>
+        <!-- Fatigue -->
+        <div class="fatigue input-group">
+            <div class="input big">
+                <div class="label">{{localize "VAGABONDS.Fatigue"}}</div>
+                <div class="value">{{system.fatigue.value}}/{{system.fatigue.max}}</div>
+            </div>
+        </div>
+        <!-- Portrait -->
+        <img class="image input-group" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="100" />
+    </header>
+
+    {{!-- Sheet Tab Navigation --}}
+    <nav class="sheet-tabs tabs" data-group="primary">
+        {{!-- Default tab is specified in actor-sheet.mjs --}}
+        <a class="item" data-tab="inventory">{{localize "VAGABONDS.Inventory"}}</a>
+        <a class="item" data-tab="notes">{{localize "VAGABONDS.Notes"}}</a>
+    </nav>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Inventory Tab --}}
+        <div class="tab inventory" data-group="primary" data-tab="inventory">
+            {{> "systems/vagabonds-in-the-wilds/templates/actor/parts/actor-inventory.html"}}
+        </div>
+
+        {{!-- Notes Tab --}}
+        <div class="tab notes" data-group="primary" data-tab="notes">
+            {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll
+            data to the rollData property. --}}
+            {{editor system.biography target="system.biography" rollData=rollData button=true owner=owner
+            editable=editable}}
+        </div>
+
+    </section>
+</form>

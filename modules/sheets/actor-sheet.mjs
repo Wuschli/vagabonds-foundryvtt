@@ -1,5 +1,3 @@
-import {onManageActiveEffect, prepareActiveEffectCategories} from "../helpers/effects.mjs";
-
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
@@ -10,7 +8,7 @@ export class VagabondsActorSheet extends ActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["vagabonds", "sheet", "actor"],
-      template: "systems/vagabonds/templates/actor/actor-sheet.html",
+      template: "systems/vagabonds-in-the-wilds/templates/actor/actor-sheet.html",
       width: 600,
       height: 600,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "features" }]
@@ -19,7 +17,7 @@ export class VagabondsActorSheet extends ActorSheet {
 
   /** @override */
   get template() {
-    return `systems/vagabonds/templates/actor/actor-${this.actor.type}-sheet.html`;
+    return `systems/vagabonds-in-the-wilds/templates/actor/actor-${this.actor.type}-sheet.html`;
   }
 
   /* -------------------------------------------- */
@@ -53,9 +51,6 @@ export class VagabondsActorSheet extends ActorSheet {
     // Add roll data for TinyMCE editors.
     context.rollData = context.actor.getRollData();
 
-    // Prepare active effects
-    context.effects = prepareActiveEffectCategories(this.actor.effects);
-
     return context;
   }
 
@@ -67,10 +62,19 @@ export class VagabondsActorSheet extends ActorSheet {
    * @return {undefined}
    */
   _prepareCharacterData(context) {
-    // Handle ability scores.
-    for (let [k, v] of Object.entries(context.system.methods)) {
-      v.label = game.i18n.localize(CONFIG.BOILERPLATE.methods[k]) ?? k;
+    const systemData = context.system;
+    // Handle method labels and attribute grouping.
+    for (let [k, method] of Object.entries(systemData.methods)) {
+      method.label = game.i18n.localize(CONFIG.VAGABONDS.methods[k]) ?? k;
+
+      systemData.attributes[method.attribute].methods[k] = method;
     }
+
+    // Handle attribute labels.
+    for (let [k, attribute] of Object.entries(systemData.attributes)) {
+      attribute.label = game.i18n.localize(CONFIG.VAGABONDS.attributes[k]) ?? k;
+    }
+
   }
 
   /**
@@ -150,9 +154,6 @@ export class VagabondsActorSheet extends ActorSheet {
       li.slideUp(200, () => this.render(false));
     });
 
-    // Active Effect management
-    html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
-
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this));
 
@@ -191,7 +192,7 @@ export class VagabondsActorSheet extends ActorSheet {
     delete itemData.system["type"];
 
     // Finally, create the item!
-    return await Item.create(itemData, {parent: this.actor});
+    return await Item.create(itemData, { parent: this.actor });
   }
 
   /**

@@ -48,13 +48,21 @@ export class VagabondsActor extends Actor {
         // Make modifications to data here. For example:
         const systemData = actorData.system;
 
-        systemData.attributes = { "might": 0, "finesse": 0, "wits": 0, "heart": 0 };
+        systemData.attributes = {
+            "might": { value: 0, methods: {} },
+            "finesse": { value: 0, methods: {} },
+            "wits": { value: 0, methods: {} },
+            "heart": { value: 0, methods: {} }
+        };
 
-        // Loop through ability scores, and add their modifiers to our sheet output.
+        // Loop through method scores, and calculate attribute scores.
         for (let [key, method] of Object.entries(systemData.methods)) {
             if (method.value > 0)
-                systemData.attributes[method.attribute]++;
+                systemData.attributes[method.attribute].value++;
         }
+
+        const attributes = systemData.attributes;
+        systemData.fatigue.max = attributes.might.value + attributes.finesse.value + attributes.wits.value + attributes.heart.value + systemData.fatigue.limitBonus;
     }
 
     /**

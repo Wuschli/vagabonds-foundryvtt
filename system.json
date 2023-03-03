@@ -2,7 +2,7 @@
     "id": "vagabonds-in-the-wilds",
     "title": "Vagabonds in the Wilds",
     "description": "A foundry VTT implementation of Vagabonds in the Wilds.",
-    "version": "0.0.1",
+    "version": "0.1.1",
     "compatibility": {
         "minimum": "10",
         "verified": "10",
@@ -11,7 +11,7 @@
     "authors": [
         {
             "name": "Lukas Höppner",
-            "url": "wuschli.net",
+            "url": "https://wuschli.net",
             "email": "lukas.hoeppner@gmail.com"
         }
     ],
