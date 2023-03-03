@@ -7,6 +7,7 @@ import { VagabondsItemSheet } from "./sheets/item-sheet.mjs";
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { VAGABONDS } from "./helpers/config.mjs";
+import { VagabondsDie, VagabondsRoll } from "./helpers/vagabonds-roll.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -19,7 +20,9 @@ Hooks.once('init', async function () {
     game.vagabonds = {
         VagabondsActor,
         VagabondsItem,
-        rollItemMacro
+        rollItemMacro,
+        VagabondsDie,
+        VagabondsRoll
     };
 
     // Add custom constants for configuration.
@@ -37,6 +40,10 @@ Hooks.once('init', async function () {
     // Define custom Document classes
     CONFIG.Actor.documentClass = VagabondsActor;
     CONFIG.Item.documentClass = VagabondsItem;
+
+    CONFIG.Dice.terms['v'] = VagabondsDie;
+    // CONFIG.Dice.terms['6'] = VagabondsDie;
+    CONFIG.Dice.rolls.push(VagabondsRoll);
 
     // Register sheet application classes
     Actors.unregisterSheet("core", ActorSheet);

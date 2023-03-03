@@ -62,7 +62,8 @@ export class VagabondsActor extends Actor {
         }
 
         const attributes = systemData.attributes;
-        systemData.fatigue.max = attributes.might.value + attributes.finesse.value + attributes.wits.value + attributes.heart.value + systemData.fatigue.limitBonus;
+        systemData.fatigue.max = attributes.might.value + attributes.finesse.value + attributes.wits.value + attributes.heart.value + (systemData.fatigue.bonus ?? 0);
+        console.log(systemData);
     }
 
     /**
@@ -99,12 +100,12 @@ export class VagabondsActor extends Actor {
         // formulas like `@str.mod + 4`.
         if (data.methods) {
             for (let [k, v] of Object.entries(data.methods)) {
-                data[k] = foundry.utils.deepClone(v);
+                data[k] = v.value;
             }
         }
         if (data.attributes) {
             for (let [k, v] of Object.entries(data.attributes)) {
-                data[k] = foundry.utils.deepClone(v);
+                data[k] = v.value;
             }
         }
     }

@@ -2,7 +2,7 @@
     "Actor": {
         "types": [
             "character",
-            "enemy"
+            "creature"
         ],
         "templates": {},
         "character": {
@@ -20,7 +20,7 @@
                 "min": 0,
                 "value": 0,
                 "max": 0,
-                "limitBonus": 4
+                "bonus": 2
             },
             "armor": 0,
             "methods": {
@@ -140,7 +140,7 @@
             "proficiencies": [],
             "talents": []
         },
-        "enemy": {
+        "creature": {
             "difficulty": 0,
             "description": ""
         }

@@ -56,19 +56,19 @@
         <!-- Methods -->
         <div class="methods input-group">
             {{#each system.attributes}}
-            <div class="method attribute">
+            <div class="method attribute rollable">
                 <div class="method-name label">{{this.label}}</div>
                 <div class="value">{{this.value}}</div>
             </div>
-                {{#each this.methods}}
-                <div class="method">
-                    <input name="system.methods.{{@key}}.used" class="method-used label" type="checkbox" {{checked
-                        this.used}} />
-                    <div class="method-name label">{{this.label}}</div>
-                    <input name="system.methods.{{@key}}.value" class="value" type="number" value="{{this.value}}"
-                        data-dtype="Number" />
-                </div>
-                {{/each}}
+            {{#each this.methods}}
+            <div class="method">
+                <input name="system.methods.{{@key}}.used" class="method-used label" type="checkbox" {{checked
+                    this.used}} />
+                <div class="method-name label rollable" data-method="{{@key}}">{{this.label}}</div>
+                <input name="system.methods.{{@key}}.value" class="value" type="number" value="{{this.value}}"
+                    data-dtype="Number" />
+            </div>
+            {{/each}}
             {{/each}}
         </div>
         <!-- Fatigue -->
@@ -87,6 +87,7 @@
         {{!-- Default tab is specified in actor-sheet.mjs --}}
         <a class="item" data-tab="inventory">{{localize "VAGABONDS.Inventory"}}</a>
         <a class="item" data-tab="notes">{{localize "VAGABONDS.Notes"}}</a>
+        <a class="item" data-tab="biography">{{localize "VAGABONDS.Biography"}}</a>
     </nav>
 
     {{!-- Sheet Body --}}
@@ -99,6 +100,14 @@
 
         {{!-- Notes Tab --}}
         <div class="tab notes" data-group="primary" data-tab="notes">
+            {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll
+            data to the rollData property. --}}
+            {{editor system.notes target="system.notes" rollData=rollData button=true owner=owner
+            editable=editable}}
+        </div>
+
+        {{!-- Biography Tab --}}
+        <div class="tab biography" data-group="primary" data-tab="biography">
             {{!-- If you want TinyMCE editors to output inline rolls when rendered, you need to pass the actor's roll
             data to the rollData property. --}}
             {{editor system.biography target="system.biography" rollData=rollData button=true owner=owner

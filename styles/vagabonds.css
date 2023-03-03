@@ -8,6 +8,13 @@
     --color-bg-option: #ddd;
 }
 
+.rollable:hover,
+.rollable:focus {
+    /* color: #000; */
+    text-shadow: 0 0 10px red;
+    cursor: pointer;
+}
+
 .vagabonds.sheet .input-group {
     border-radius: 10px;
     border: 2px solid #000;
@@ -128,4 +135,16 @@
 
 .vagabonds .char-header .attributes {
     grid-area: attributes;
+}
+
+.roll.vagabondsdie.d6 {
+    width: 32px;
+    height: 32px;
+    background-size: 32px 32px;
+    padding: 5px;
+}
+
+.dice-tooltip .dice-rolls .roll.partial {
+    color: #52470b;
+    filter: sepia(0.5) hue-rotate(0deg);
 }

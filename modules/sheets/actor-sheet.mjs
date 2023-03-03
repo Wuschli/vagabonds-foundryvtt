@@ -1,3 +1,5 @@
+import { VagabondsRoll } from "../helpers/vagabonds-roll.mjs";
+
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
@@ -10,8 +12,8 @@ export class VagabondsActorSheet extends ActorSheet {
       classes: ["vagabonds", "sheet", "actor"],
       template: "systems/vagabonds-in-the-wilds/templates/actor/actor-sheet.html",
       width: 600,
-      height: 600,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "features" }]
+      height: 800,
+      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "inventory" }]
     });
   }
 
@@ -200,10 +202,27 @@ export class VagabondsActorSheet extends ActorSheet {
    * @param {Event} event   The originating click event
    * @private
    */
-  _onRoll(event) {
+  async _onRoll(event) {
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
+
+    // Handle method rolls
+    if (dataset.method) {
+      let rollData = this.actor.getRollData();
+      const diceCount = rollData[dataset.method];
+      const formula = `${diceCount}dv`;
+      let roll = new VagabondsRoll(formula);
+      await roll.evaluate({ async: true });
+      
+      // roll.result = `${successes} ${game.i18n.localize("VAGABONDS.successes")} and ${partials} ${game.i18n.localize("VAGABONDS.partials")}`;
+      // roll.total = successes * 2 + partials * 1;
+      console.log(roll);
+      roll.toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor })
+      });
+      return roll;
+    }
 
     // Handle item rolls.
     if (dataset.rollType) {
@@ -213,6 +232,7 @@ export class VagabondsActorSheet extends ActorSheet {
         if (item) return item.roll();
       }
     }
+
 
     // Handle rolls that supply the formula directly.
     if (dataset.roll) {
