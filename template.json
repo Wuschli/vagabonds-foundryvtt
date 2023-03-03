@@ -1,0 +1,191 @@
+{
+    "Actor": {
+        "types": [
+            "character",
+            "enemy"
+        ],
+        "templates": {},
+        "character": {
+            "biography": "",
+            "notes": "",
+            "description": {
+                "background": "Background",
+                "physique": "",
+                "mark": "",
+                "clothes": "",
+                "personality": "",
+                "motivation": ""
+            },
+            "fatigue": {
+                "min": 0,
+                "value": 0,
+                "max": 0
+            },
+            "armor": 0,
+            "methods": {
+                "endure": {
+                    "min": 0,
+                    "value": 0,
+                    "max": 4,
+                    "attribute": "might"
+                },
+                "force": {
+                    "min": 0,
+                    "value": 0,
+                    "max": 4,
+                    "attribute": "might"
+                },
+                "fight": {
+                    "min": 0,
+                    "value": 0,
+                    "max": 4,
+                    "attribute": "might"
+                },
+                "wreck": {
+                    "min": 0,
+                    "value": 0,
+                    "max": 4,
+                    "attribute": "might"
+                },
+                "tinker": {
+                    "min": 0,
+                    "value": 0,
+                    "max": 4,
+                    "attribute": "finesse"
+                },
+                "move": {
+                    "min": 0,
+                    "value": 0,
+                    "max": 4,
+                    "attribute": "finesse"
+                },
+                "shoot": {
+                    "min": 0,
+                    "value": 0,
+                    "max": 4,
+                    "attribute": "finesse"
+                },
+                "conceal": {
+                    "min": 0,
+                    "value": 0,
+                    "max": 4,
+                    "attribute": "finesse"
+                },
+                "spy": {
+                    "min": 0,
+                    "value": 0,
+                    "max": 4,
+                    "attribute": "wits"
+                },
+                "assess": {
+                    "min": 0,
+                    "value": 0,
+                    "max": 4,
+                    "attribute": "wits"
+                },
+                "survive": {
+                    "min": 0,
+                    "value": 0,
+                    "max": 4,
+                    "attribute": "wits"
+                },
+                "know": {
+                    "min": 0,
+                    "value": 0,
+                    "max": 4,
+                    "attribute": "wits"
+                },
+                "sway": {
+                    "min": 0,
+                    "value": 0,
+                    "max": 4,
+                    "attribute": "heart"
+                },
+                "nurse": {
+                    "min": 0,
+                    "value": 0,
+                    "max": 4,
+                    "attribute": "heart"
+                },
+                "consort": {
+                    "min": 0,
+                    "value": 0,
+                    "max": 4,
+                    "attribute": "heart"
+                },
+                "parley": {
+                    "min": 0,
+                    "value": 0,
+                    "max": 4,
+                    "attribute": "heart"
+                }
+            },
+            "proficiencies": [],
+            "talents": []
+        },
+        "enemy": {
+            "difficulty": 0,
+            "description": ""
+        }
+    },
+    "Item": {
+        "types": [
+            "item",
+            "condition",
+            "weapon",
+            "armor",
+            "talent"
+        ],
+        "templates": {
+            "base": {
+                "description": "",
+                "sheet": {
+                    "active": false,
+                    "currentX": 0,
+                    "currentY": 0,
+                    "initialX": 0,
+                    "initialY": 0,
+                    "xOffset": 0,
+                    "yOffset": 0,
+                    "rotation": 0,
+                    "curWidth": 1,
+                    "curHeight": 1,
+                    "zIndex": 1
+                },
+                "pennies": {
+                    "value": 0,
+                    "max": 0,
+                    "html": ""
+                },
+                "size": {
+                    "width": 1,
+                    "height": 1,
+                    "x": "9em",
+                    "y": "9em",
+                    "aspect": 1
+                }
+            }
+        },
+        "item": {
+            "templates": [
+                "base"
+            ]
+        },
+        "condition": {
+            "templates": [
+                "base"
+            ]
+        },
+        "weapon": {
+            "templates": [
+                "base"
+            ]
+        },
+        "armor": {
+            "templates": [
+                "base"
+            ]
+        },
+        "talent": {}
+    }
+}
