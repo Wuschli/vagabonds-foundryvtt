@@ -56,7 +56,7 @@
         <!-- Methods -->
         <div class="methods input-group">
             {{#each system.attributes}}
-            <div class="method attribute rollable">
+            <div class="method attribute rollable" data-attribute="{{@key}}">
                 <div class="method-name label">{{this.label}}</div>
                 <div class="value">{{this.value}}</div>
             </div>

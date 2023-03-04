@@ -7,7 +7,7 @@ import { VagabondsItemSheet } from "./sheets/item-sheet.mjs";
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { VAGABONDS } from "./helpers/config.mjs";
-import { VagabondsDie, VagabondsRoll } from "./helpers/vagabonds-roll.mjs";
+import { VagabondsDie } from "./helpers/vagabonds-die.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -20,9 +20,7 @@ Hooks.once('init', async function () {
     game.vagabonds = {
         VagabondsActor,
         VagabondsItem,
-        rollItemMacro,
-        VagabondsDie,
-        VagabondsRoll
+        VagabondsDie
     };
 
     // Add custom constants for configuration.
@@ -41,9 +39,7 @@ Hooks.once('init', async function () {
     CONFIG.Actor.documentClass = VagabondsActor;
     CONFIG.Item.documentClass = VagabondsItem;
 
-    CONFIG.Dice.terms['v'] = VagabondsDie;
-    // CONFIG.Dice.terms['6'] = VagabondsDie;
-    CONFIG.Dice.rolls.push(VagabondsRoll);
+    CONFIG.Dice.terms["v"] = VagabondsDie;
 
     // Register sheet application classes
     Actors.unregisterSheet("core", ActorSheet);
@@ -83,62 +79,38 @@ Hooks.once("ready", async function () {
     Hooks.on("hotbarDrop", (bar, data, slot) => createItemMacro(data, slot));
 });
 
+
 /* -------------------------------------------- */
-/*  Hotbar Macros                               */
+/*  Dice So Nice Hook                           */
 /* -------------------------------------------- */
 
-/**
- * Create a Macro from an Item drop.
- * Get an existing item macro if one exists, otherwise create a new one.
- * @param {Object} data     The dropped data
- * @param {number} slot     The hotbar slot to use
- * @returns {Promise}
- */
-async function createItemMacro(data, slot) {
-    // First, determine if this is a valid owned item.
-    if (data.type !== "Item") return;
-    if (!data.uuid.includes('Actor.') && !data.uuid.includes('Token.')) {
-        return ui.notifications.warn("You can only create macro buttons for owned Items");
-    }
-    // If it is, retrieve it based on the uuid.
-    const item = await Item.fromDropData(data);
-
-    // Create the macro command using the uuid.
-    const command = `game.vagabonds.rollItemMacro("${data.uuid}");`;
-    let macro = game.macros.find(m => (m.name === item.name) && (m.command === command));
-    if (!macro) {
-        macro = await Macro.create({
-            name: item.name,
-            type: "script",
-            img: item.img,
-            command: command,
-            flags: { "vagabonds.itemMacro": true }
-        });
-    }
-    game.user.assignHotbarMacro(macro, slot);
-    return false;
-}
-
-/**
- * Create a Macro from an Item drop.
- * Get an existing item macro if one exists, otherwise create a new one.
- * @param {string} itemUuid
- */
-function rollItemMacro(itemUuid) {
-    // Reconstruct the drop data so that we can load the item.
-    const dropData = {
-        type: 'Item',
-        uuid: itemUuid
-    };
-    // Load the item from the uuid.
-    Item.fromDropData(dropData).then(item => {
-        // Determine if the item loaded and if it's an owned item.
-        if (!item || !item.parent) {
-            const itemName = item?.name ?? itemUuid;
-            return ui.notifications.warn(`Could not find item ${itemName}. You may need to delete and recreate this macro.`);
-        }
-
-        // Trigger the item roll
-        item.roll();
+Hooks.once("diceSoNiceReady", async (dice3d) => {
+    dice3d.addSystem({ id: "vagabonds-in-the-wilds", name: "Vagabonds in the Wilds" }, "preferred");
+    dice3d.addDicePreset({
+        type: "dv",
+        labels: [
+            // 'systems/vagabonds-in-the-wilds/assets/dice/skull_dsn.png',
+            // 'systems/vagabonds-in-the-wilds/assets/dice/blank_dsn.png',
+            // 'systems/vagabonds-in-the-wilds/assets/dice/blank_dsn.png',
+            // 'systems/vagabonds-in-the-wilds/assets/dice/blank_dsn.png',
+            // 'systems/vagabonds-in-the-wilds/assets/dice/shield_dsn.png',
+            // 'systems/vagabonds-in-the-wilds/assets/dice/sword_dsn.png'
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6'
+        ],
+        // bumpMaps: [
+        //     'systems/vagabonds-in-the-wilds/assets/dice/skull_dsn.png',
+        //     'systems/vagabonds-in-the-wilds/assets/dice/blank_dsn.png',
+        //     'systems/vagabonds-in-the-wilds/assets/dice/blank_dsn.png',
+        //     'systems/vagabonds-in-the-wilds/assets/dice/blank_dsn.png',
+        //     'systems/vagabonds-in-the-wilds/assets/dice/shield_dsn.png',
+        //     'systems/vagabonds-in-the-wilds/assets/dice/sword_dsn.png'
+        // ],
+        system: "vagabonds-in-the-wilds"
     });
-}
+    console.log("foo");
+});

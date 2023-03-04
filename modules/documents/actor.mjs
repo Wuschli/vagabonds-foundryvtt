@@ -63,7 +63,6 @@ export class VagabondsActor extends Actor {
 
         const attributes = systemData.attributes;
         systemData.fatigue.max = attributes.might.value + attributes.finesse.value + attributes.wits.value + attributes.heart.value + (systemData.fatigue.bonus ?? 0);
-        console.log(systemData);
     }
 
     /**

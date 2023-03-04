@@ -1,5 +1,3 @@
-import { VagabondsRoll } from "../helpers/vagabonds-roll.mjs";
-
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
@@ -207,19 +205,40 @@ export class VagabondsActorSheet extends ActorSheet {
     const element = event.currentTarget;
     const dataset = element.dataset;
 
-    // Handle method rolls
+    // Handle action rolls
     if (dataset.method) {
       let rollData = this.actor.getRollData();
       const diceCount = rollData[dataset.method];
-      const formula = `${diceCount}dv`;
-      let roll = new VagabondsRoll(formula);
+      let formula = `${diceCount}dv`;
+      if (diceCount < 1)
+        formula = '2dvkl';
+      let roll = new Roll(formula);
       await roll.evaluate({ async: true });
-      
-      // roll.result = `${successes} ${game.i18n.localize("VAGABONDS.successes")} and ${partials} ${game.i18n.localize("VAGABONDS.partials")}`;
-      // roll.total = successes * 2 + partials * 1;
-      console.log(roll);
+
+      // console.log(roll);
       roll.toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor })
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        flavor: `${dataset.method} Action Roll`,
+        rollMode: game.settings.get('core', 'rollMode'),
+      });
+      return roll;
+    }
+
+    // Handle saving throws
+    if (dataset.attribute) {
+      let rollData = this.actor.getRollData();
+      const diceCount = rollData[dataset.attribute];
+      let formula = `${diceCount}dv`;
+      if (diceCount < 1)
+        formula = '2dvkl';
+      let roll = new Roll(formula);
+      await roll.evaluate({ async: true });
+
+      // console.log(roll);
+      roll.toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+        flavor: `${dataset.attribute} Saving Throw`,
+        rollMode: game.settings.get('core', 'rollMode'),
       });
       return roll;
     }

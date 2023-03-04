@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica&display=swap');
 
+:root {
+    --color-shadow-primary: #222;
+    --color-shadow-highlight: #888;
+    --color-border-highlight-alt: #888;
+    --color-border-highlight: #888;
+}
+
 .vagabonds.window-app .window-content {
     background: white;
     font-family: 'IM Fell DW Pica', serif;
@@ -11,7 +18,7 @@
 .rollable:hover,
 .rollable:focus {
     /* color: #000; */
-    text-shadow: 0 0 10px red;
+    text-shadow: 0 0 10px var(--color-shadow-primary);
     cursor: pointer;
 }
 
@@ -144,7 +151,25 @@
     padding: 5px;
 }
 
+.dice-roll .dice-tooltip {
+    display: block;
+}
+
 .dice-tooltip .dice-rolls .roll.partial {
     color: #52470b;
     filter: sepia(0.5) hue-rotate(0deg);
+}
+
+.chat-message,
+.dice-roll .dice-formula,
+.dice-roll .dice-total,
+button,
+form button,
+.directory .directory-header .header-search input,
+.window-app .window-content,
+.sheet.journal-entry .journal-entry-content,
+#chat-form textarea,
+#chat-controls .roll-type-select {
+    /* background: rgba(255, 255, 255, 0.8); */
+    background: #fff;
 }
