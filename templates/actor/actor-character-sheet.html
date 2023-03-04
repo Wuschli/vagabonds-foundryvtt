@@ -4,56 +4,64 @@
     <header class="char-header">
 
         <div class="description input-group">
-            <!-- Character name -->
+
+            {{!-- Character name --}}
             <div class="input big">
                 <div class="label">{{localize "VAGABONDS.ActorName"}}</div>
                 <div class="value"><input name="name" type="text" value="{{actor.name}}" placeholder="Name"
                         style="height: auto;" /></div>
             </div>
             <div class="seperatorLine"></div>
-            <!-- Background -->
+
+            {{!-- Background --}}
             <div class="input">
                 <div class="label">{{localize "VAGABONDS.ActorBackground"}}</div>
                 <div class="value"><input name="system.description.background" type="text"
                         value="{{system.description.background}}" placeholder="" data-dtype="String" /></div>
             </div>
             <div class="seperatorLine"></div>
-            <!-- Physique -->
+
+            {{!-- Physique --}}
             <div class="input">
                 <div class="label">{{localize "VAGABONDS.Physique"}}</div>
                 <div class="value"><input name="system.description.physique" type="text"
                         value="{{system.description.physique}}" placeholder="" data-dtype="String" /></div>
             </div>
             <div class="seperatorLine"></div>
-            <!-- Mark -->
+
+            {{!-- Mark --}}
             <div class="input">
                 <div class="label">{{localize "VAGABONDS.Mark"}}</div>
                 <div class="value"><input name="system.description.mark" type="text" value="{{system.description.mark}}"
                         placeholder="" data-dtype="String" /></div>
             </div>
             <div class="seperatorLine"></div>
-            <!-- Clothes -->
+
+            {{!-- Clothes --}}
             <div class="input">
                 <div class="label">{{localize "VAGABONDS.Clothes"}}</div>
                 <div class="value"><input name="system.description.clothes" type="text"
                         value="{{system.description.clothes}}" placeholder="" data-dtype="String" /></div>
             </div>
             <div class="seperatorLine"></div>
-            <!-- Personality -->
+
+            {{!-- Personality --}}
             <div class="input">
                 <div class="label">{{localize "VAGABONDS.Personality"}}</div>
                 <div class="value"><input name="system.description.personality" type="text"
                         value="{{system.description.personality}}" placeholder="" data-dtype="String" /></div>
             </div>
             <div class="seperatorLine"></div>
-            <!-- Motivation -->
+
+            {{!-- Motivation --}}
             <div class="input">
                 <div class="label">{{localize "VAGABONDS.Motivation"}}</div>
                 <div class="value"><input name="system.description.motivation" type="text"
                         value="{{system.description.motivation}}" placeholder="" data-dtype="String" /></div>
             </div>
         </div>
-        <!-- Methods -->
+
+        {{!-- Methods --}}
         <div class="methods input-group">
             {{#each system.attributes}}
             <div class="method attribute rollable" data-attribute="{{@key}}">
@@ -71,21 +79,67 @@
             {{/each}}
             {{/each}}
         </div>
-        <!-- Fatigue -->
+        {{!-- Fatigue --}}
         <div class="fatigue input-group">
             <div class="input big">
                 <div class="label">{{localize "VAGABONDS.Fatigue"}}</div>
                 <div class="value">{{system.fatigue.value}}/{{system.fatigue.max}}</div>
             </div>
         </div>
-        <!-- Portrait -->
+
+        {{!-- Portrait --}}
         <img class="image input-group" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="100" />
+
+        {{!-- Proficiencies --}}
+        <div class="proficiencies input-group">
+            <div class="divider50"></div>
+            <div class="header">
+                <div class="title">{{localize "VAGABONDS.Proficiencies"}}</div>
+
+                <div class="controls">
+                    <a class="control item-create" title="Create Proficiency" data-type="proficiency">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                </div>
+            </div>
+            {{#each proficiencies as |proficiency id|}}
+            <div class="proficiency item" data-item-id="{{proficiency._id}}">
+                <div class="item-name">{{proficiency.name}}</div>
+                <div class="item-controls">
+                    <a class="item-control item-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                    <a class="item-control item-delete" title="Delete"><i class="fas fa-trash"></i></a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+        {{!-- Talents --}}
+        <div class="talents input-group">
+            <div class="header">
+                <div class="title">{{localize "VAGABONDS.Talents"}}</div>
+                <div class="controls">
+                    <a class="control item-create" title="Create Talent" data-type="talent">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                </div>
+            </div>
+            {{#each talents as |talent id|}}
+            <div class="talent item" data-item-id="{{talent._id}}">
+                <div class="item-name">{{talent.name}}</div>
+                <div class="item-controls">
+                    <a class="item-control item-edit" title="Edit"><i class="fas fa-edit"></i></a>
+                    <a class="item-control item-delete" title="Delete"><i class="fas fa-trash"></i></a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
     </header>
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
         {{!-- Default tab is specified in actor-sheet.mjs --}}
-        <a class="item" data-tab="inventory">{{localize "VAGABONDS.Inventory"}}</a>
+        <a class="item" data-tab="inventory">{{localize "VAGABONDS.Inventory"}} ({{usedInventory}}/{{maxInventoryTotal}})</a>
         <a class="item" data-tab="notes">{{localize "VAGABONDS.Notes"}}</a>
         <a class="item" data-tab="biography">{{localize "VAGABONDS.Biography"}}</a>
     </nav>

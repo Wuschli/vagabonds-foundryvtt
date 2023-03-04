@@ -30,5 +30,7 @@
     "VAGABONDS.AttributeMight": "Kraft",
     "VAGABONDS.AttributeFinesse": "Geschick",
     "VAGABONDS.AttributeWits": "Verstand",
-    "VAGABONDS.AttributeHeart": "Herz"
+    "VAGABONDS.AttributeHeart": "Herz",
+    "VAGABONDS.Proficiencies": "Kompetenzen",
+    "VAGABONDS.Talents": "Talente"
 }

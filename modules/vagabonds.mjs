@@ -112,5 +112,4 @@ Hooks.once("diceSoNiceReady", async (dice3d) => {
         // ],
         system: "vagabonds-in-the-wilds"
     });
-    console.log("foo");
 });

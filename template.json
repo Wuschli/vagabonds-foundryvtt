@@ -22,7 +22,6 @@
                 "max": 0,
                 "bonus": 2
             },
-            "armor": 0,
             "methods": {
                 "endure": {
                     "min": 0,
@@ -151,58 +150,42 @@
             "condition",
             "weapon",
             "armor",
-            "talent"
+            "talent",
+            "proficiency"
         ],
         "templates": {
-            "base": {
+            "inventoryBase": {
                 "description": "",
-                "sheet": {
-                    "active": false,
-                    "currentX": 0,
-                    "currentY": 0,
-                    "initialX": 0,
-                    "initialY": 0,
-                    "xOffset": 0,
-                    "yOffset": 0,
-                    "rotation": 0,
-                    "curWidth": 1,
-                    "curHeight": 1,
-                    "zIndex": 1
-                },
                 "pennies": {
                     "value": 0,
                     "max": 0,
                     "html": ""
                 },
-                "size": {
-                    "width": 1,
-                    "height": 1,
-                    "x": "9em",
-                    "y": "9em",
-                    "aspect": 1
-                }
+                "size": 1,
+                "slot": "pack"
             }
         },
         "item": {
             "templates": [
-                "base"
+                "inventoryBase"
             ]
         },
         "condition": {
             "templates": [
-                "base"
+                "inventoryBase"
             ]
         },
         "weapon": {
             "templates": [
-                "base"
+                "inventoryBase"
             ]
         },
         "armor": {
             "templates": [
-                "base"
+                "inventoryBase"
             ]
         },
-        "talent": {}
+        "talent": {},
+        "proficiency": {}
     }
 }

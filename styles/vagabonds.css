@@ -71,19 +71,21 @@
 
 .vagabonds .char-header {
     display: grid;
-    grid-template-columns: 170px 3fr 100px;
-    grid-template-rows: min-content 1fr;
+    grid-template-columns: 170px 3fr 150px;
+    grid-template-rows: min-content min-content 1fr;
     column-gap: 10px;
     row-gap: 10px;
     grid-template-areas:
         "methods description image"
-        "methods fatigue fatigue";
+        "methods fatigue fatigue"
+        "methods proficiencies talents";
 }
 
 .vagabonds .char-header .methods {
     grid-area: methods;
     display: flex;
     flex-direction: column;
+    height: min-content;
 }
 
 .vagabonds .char-header .method {
@@ -128,12 +130,15 @@
 
 .vagabonds .char-header .description {
     grid-area: description;
+    height: min-content;
 }
 
 .vagabonds .char-header .image {
     grid-area: image;
-    width: 100px;
+    width: 150px;
     height: auto;
+    max-height: 168px;
+    object-fit: cover;
 }
 
 .vagabonds .char-header .fatigue {
@@ -142,6 +147,86 @@
 
 .vagabonds .char-header .attributes {
     grid-area: attributes;
+}
+
+.vagabonds .char-header .proficiencies {
+    grid-area: proficiencies;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    position: relative;
+    min-width: 250px;
+}
+
+.vagabonds .char-header .talents {
+    grid-area: talents;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    position: relative;
+    min-width: 125px;
+}
+
+.vagabonds .char-header .input-group .header {
+    background-color: #000;
+    color: #ddd;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+    flex: 0 0 100%;
+    margin: 0 0 5px 0;
+}
+
+.vagabonds .char-header .input-group .divider33 {
+    background-color: #000;
+    left: 33.3333%;
+    top: 0%;
+    width: 1px;
+    height: 100%;
+    position: absolute;
+}
+
+.vagabonds .char-header .input-group .divider66 {
+    background-color: #000;
+    right: 33.3333%;
+    top: 0%;
+    width: 1px;
+    height: 100%;
+    position: absolute;
+}
+
+.vagabonds .char-header .input-group .divider50 {
+    background-color: #000;
+    right: 50%;
+    top: 0%;
+    width: 1px;
+    height: 100%;
+    position: absolute;
+}
+
+.vagabonds .char-header .proficiencies .proficiency {
+    flex: 0 0 50%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+}
+
+.vagabonds .char-header .talents .talent {
+    flex: 0 0 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+}
+
+.vagabonds .item-controls {
+    display: flex;
+    gap: 2px;
+}
+
+.vagabonds .item-controls .item-control .fas {
+    font-size: var(--font-size-11);
 }
 
 .roll.vagabondsdie.d6 {
@@ -172,4 +257,16 @@ form button,
 #chat-controls .roll-type-select {
     /* background: rgba(255, 255, 255, 0.8); */
     background: #fff;
+}
+
+.vagabonds .inventory-wrapper {
+    display: grid !important;
+    grid-template-areas:
+        "hands pack"
+        "head pack"
+        "body pack";
+    gap: 10px;
+}
+.vagabonds .inventory-wrapper .inventory-container {
+
 }

@@ -9,7 +9,7 @@ export class VagabondsActorSheet extends ActorSheet {
     return mergeObject(super.defaultOptions, {
       classes: ["vagabonds", "sheet", "actor"],
       template: "systems/vagabonds-in-the-wilds/templates/actor/actor-sheet.html",
-      width: 600,
+      width: 640,
       height: 800,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "inventory" }]
     });
@@ -86,44 +86,47 @@ export class VagabondsActorSheet extends ActorSheet {
    */
   _prepareItems(context) {
     // Initialize containers.
-    const gear = [];
-    const features = [];
-    const spells = {
-      0: [],
-      1: [],
-      2: [],
-      3: [],
-      4: [],
-      5: [],
-      6: [],
-      7: [],
-      8: [],
-      9: []
-    };
+    const gear = { hands: [], body: [], head: [], pack: [] };
+    const talents = [];
+    const conditions = [];
+    const proficiencies = [];
 
     // Iterate through items, allocating to containers
     for (let i of context.items) {
       i.img = i.img || DEFAULT_TOKEN;
       // Append to gear.
-      if (i.type === 'item') {
-        gear.push(i);
+      if (i.type === 'item' || i.type === 'condition') {
+        gear[i.slot ?? 'pack'].push(i);
       }
-      // Append to features.
-      else if (i.type === 'feature') {
-        features.push(i);
+      // Append to talents.
+      else if (i.type === 'talent') {
+        talents.push(i);
       }
-      // Append to spells.
-      else if (i.type === 'spell') {
-        if (i.system.spellLevel != undefined) {
-          spells[i.system.spellLevel].push(i);
-        }
+      // Append to proficiency.
+      else if (i.type === 'proficiency') {
+        proficiencies.push(i);
+      }
+    }
+
+    let usedInventory = 0;
+
+    for (let [n, c] of Object.entries(gear)) {
+      for (let i of c) {
+        usedInventory += (i.system.size ?? 0);
       }
     }
 
     // Assign and return
     context.gear = gear;
-    context.features = features;
-    context.spells = spells;
+    context.talents = talents;
+    context.conditions = conditions;
+    context.proficiencies = proficiencies;
+    context.maxInventoryHands = 2;
+    context.maxInventoryBody = 3;
+    context.maxInventoryHead = 1;
+    context.maxInventoryPacked = 6;
+    context.maxInventoryTotal = context.maxInventoryHands + context.maxInventoryBody + context.maxInventoryHead + context.maxInventoryPacked;
+    context.usedInventory = usedInventory;
   }
 
   /* -------------------------------------------- */
