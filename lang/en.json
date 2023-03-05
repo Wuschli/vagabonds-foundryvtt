@@ -32,5 +32,12 @@
     "VAGABONDS.AttributeWits": "Wits",
     "VAGABONDS.AttributeHeart": "Heart",
     "VAGABONDS.Proficiencies": "Proficiencies",
-    "VAGABONDS.Talents": "Talents"
+    "VAGABONDS.Talents": "Talents",
+    "VAGABONDS.ContainerHands": "Hands",
+    "VAGABONDS.ContainerHead": "Head",
+    "VAGABONDS.ContainerBody": "Body",
+    "VAGABONDS.ContainerPack": "Backpack",
+    "VAGABONDS.Edit": "Edit",
+    "VAGABONDS.Delete": "Delete",
+    "VAGABONDS.Create": "Create"
 }

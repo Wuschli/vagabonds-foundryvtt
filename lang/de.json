@@ -32,5 +32,12 @@
     "VAGABONDS.AttributeWits": "Verstand",
     "VAGABONDS.AttributeHeart": "Herz",
     "VAGABONDS.Proficiencies": "Kompetenzen",
-    "VAGABONDS.Talents": "Talente"
+    "VAGABONDS.Talents": "Talente",
+    "VAGABONDS.ContainerHands": "Hände",
+    "VAGABONDS.ContainerHead": "Kopf",
+    "VAGABONDS.ContainerBody": "Körper",
+    "VAGABONDS.ContainerPack": "Rucksack",
+    "VAGABONDS.Edit": "Bearbeiten",
+    "VAGABONDS.Delete": "Löschen",
+    "VAGABONDS.Create": "Hinzufügen"
 }

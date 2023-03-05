@@ -63,6 +63,33 @@ export class VagabondsActor extends Actor {
 
         const attributes = systemData.attributes;
         systemData.fatigue.max = attributes.might.value + attributes.finesse.value + attributes.wits.value + attributes.heart.value + (systemData.fatigue.bonus ?? 0);
+
+        const inventory = {
+            hands: {
+                size: 2,
+                items: [],
+            },
+            body: {
+                size: 3,
+                items: [],
+            },
+            head: {
+                size: 1,
+                items: [],
+            },
+            pack: {
+                size: 6,
+                items: [],
+            }
+        };
+
+        for (let i of actorData.items) {
+            // Append to inventory.
+            if (i.type === 'item' || i.type === 'condition') {
+                inventory[i.system.slot || 'pack'].items.push(i);
+            }
+        }
+        systemData.inventory = inventory;
     }
 
     /**

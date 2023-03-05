@@ -10,8 +10,12 @@ export class VagabondsActorSheet extends ActorSheet {
       classes: ["vagabonds", "sheet", "actor"],
       template: "systems/vagabonds-in-the-wilds/templates/actor/actor-sheet.html",
       width: 640,
-      height: 800,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "inventory" }]
+      height: 820,
+      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "inventory" }],
+      // dragDrop: [{
+      //   dragSelector: ".item-list .item",
+      //   dropSelector: ".inventory-container"
+      // }]
     });
   }
 
@@ -85,8 +89,11 @@ export class VagabondsActorSheet extends ActorSheet {
    * @return {undefined}
    */
   _prepareItems(context) {
-    // Initialize containers.
-    const gear = { hands: [], body: [], head: [], pack: [] };
+    // Handle inventory container labels
+    for (let [k, container] of Object.entries(context.system.inventory)) {
+      container.label = game.i18n.localize(CONFIG.VAGABONDS.containers[k]) ?? k;
+    }
+
     const talents = [];
     const conditions = [];
     const proficiencies = [];
@@ -94,12 +101,9 @@ export class VagabondsActorSheet extends ActorSheet {
     // Iterate through items, allocating to containers
     for (let i of context.items) {
       i.img = i.img || DEFAULT_TOKEN;
-      // Append to gear.
-      if (i.type === 'item' || i.type === 'condition') {
-        gear[i.slot ?? 'pack'].push(i);
-      }
+
       // Append to talents.
-      else if (i.type === 'talent') {
+      if (i.type === 'talent') {
         talents.push(i);
       }
       // Append to proficiency.
@@ -109,24 +113,24 @@ export class VagabondsActorSheet extends ActorSheet {
     }
 
     let usedInventory = 0;
+    let maxInventoryTotal = 0;
 
-    for (let [n, c] of Object.entries(gear)) {
-      for (let i of c) {
+    for (let [n, c] of Object.entries(context.system.inventory)) {
+      maxInventoryTotal += c.size;
+      for (let i of c.items) {
         usedInventory += (i.system.size ?? 0);
       }
     }
 
     // Assign and return
-    context.gear = gear;
+    context.inventory = context.system.inventory;
     context.talents = talents;
     context.conditions = conditions;
     context.proficiencies = proficiencies;
-    context.maxInventoryHands = 2;
-    context.maxInventoryBody = 3;
-    context.maxInventoryHead = 1;
-    context.maxInventoryPacked = 6;
-    context.maxInventoryTotal = context.maxInventoryHands + context.maxInventoryBody + context.maxInventoryHead + context.maxInventoryPacked;
+    context.maxInventoryTotal = maxInventoryTotal;
     context.usedInventory = usedInventory;
+
+    // console.log(context);
   }
 
   /* -------------------------------------------- */
@@ -160,15 +164,31 @@ export class VagabondsActorSheet extends ActorSheet {
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this));
 
-    // Drag events for macros.
-    if (this.actor.isOwner) {
-      let handler = ev => this._onDragStart(ev);
-      html.find('li.item').each((i, li) => {
-        if (li.classList.contains("inventory-header")) return;
-        li.setAttribute("draggable", true);
-        li.addEventListener("dragstart", handler, false);
-      });
-    }
+    const dragDrop = new DragDrop({
+      dragSelector: ".item",
+      dropSelector: ".inventory-container",
+      // permissions: {
+      //   dragstart: this.canDragStart.bind(this),
+      //   drop: this.canDragDrop.bind(this)
+      // },
+      callbacks: {
+        dragstart: this.onDragStart.bind(this),
+        drop: this.onDragDrop.bind(this)
+      }
+    })
+    dragDrop.bind(html.find('.inventory')[0]);
+
+    // Drag events
+    // if (this.actor.isOwner) {
+    //   let dragStartHandler = ev => this._onDragStart(ev);
+    //   // let dragEndHandler = ev => this._onDragEnd(ev);
+    //   html.find('.inventory .item').each((i, li) => {
+    //     if (li.classList.contains("inventory-header")) return;
+    //     li.setAttribute("draggable", true);
+    //     li.addEventListener("dragstart", dragStartHandler, false);
+    //     // li.addEventListener("dragend", dragEndHandler, false);
+    //   });
+    // }
   }
 
   /**
@@ -178,11 +198,22 @@ export class VagabondsActorSheet extends ActorSheet {
    */
   async _onItemCreate(event) {
     event.preventDefault();
+    // console.log(this);
     const header = event.currentTarget;
     // Get the type of item to create.
     const type = header.dataset.type;
+    const slot = header.dataset.slot;
+
+    const container = this.actor.system.inventory[slot];
+    let usedSpace = 0;
+    container.items.forEach(i => usedSpace += i.system.size);
+    // console.log(usedSpace + '/' + container.size);
+    if (usedSpace >= container.size)
+      return;
+
     // Grab any data associated with this control.
     const data = duplicate(header.dataset);
+
     // Initialize a default name.
     const name = `New ${type.capitalize()}`;
     // Prepare the item object.
@@ -269,4 +300,76 @@ export class VagabondsActorSheet extends ActorSheet {
     }
   }
 
+  // canDragStart(selector) {
+  //   return this.isEditable && selector == '.item';
+  // }
+
+  // canDragDrop(selector) {
+  //   return this.isEditable && selector == '.inventory-container';
+  // }
+
+  onDragStart(event) {
+    const itemId = event.currentTarget.dataset.itemId;
+    const item = this.actor.getEmbeddedDocument("Item", itemId, true);
+    event.dataTransfer.setData("text/plain", JSON.stringify({
+      type: "Item",
+      sheetTab: this.actor.flags["_sheetTab"],
+      actorId: this.actor.id,
+      itemId: itemId,
+      fromToken: this.actor.isToken,
+      data: item
+    }));
+  }
+
+  async onDragDrop(event) {
+    // console.log(event);
+  }
+
+  /** @override */
+  async _onDropFolder(event, data) {
+    if (!this.actor.isOwner) return [];
+    if (data.documentName !== "Item") return [];
+    const folder = await Folder.implementation.fromDropData(data);
+    if (!folder) return [];
+    return this._onDropItemCreate(folder.contents.map(item => {
+      return game.items.fromCompendium(item);
+    }), event.target.dataset.slot);
+  }
+
+  /** @override */
+  async _onDropItem(event, data) {
+    if (!this.actor.isOwner) return false;
+
+    const item = await Item.implementation.fromDropData(data);
+    const itemData = item.toObject();
+
+    const actor = this.actor;
+    let sameActor = (data.actorId === actor.id) || (actor.isToken && (data.tokenId === actor.token.id));
+
+    // TODO check if target slot has enough space
+
+    if (sameActor) {
+      // console.log(event, itemData);
+      // return this._onSortItem(event, itemData);
+      return this.moveItemsToSlot([itemData._id], event.target.dataset.slot);
+      // TODO Add item sorting
+    }
+
+    return this._onDropItemCreate(itemData, event.target.dataset.slot);
+    // TODO Remove item from previous Actor
+  }
+
+  /** @override */
+  async _onDropItemCreate(itemData, slot) {
+    slot = slot || 'pack';
+    itemData = itemData instanceof Array ? itemData : [itemData];
+    const result = await this.actor.createEmbeddedDocuments("Item", itemData);
+    await this.moveItemsToSlot(result.map(i => i._id), slot);
+    return result;
+  }
+
+  async moveItemsToSlot(itemIds, slot) {
+    const updates = itemIds.map(id => { return { _id: id, system: { slot: slot } } });
+    return this.actor.updateEmbeddedDocuments("Item", updates);
+  }
 }

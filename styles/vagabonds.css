@@ -265,8 +265,42 @@ form button,
         "hands pack"
         "head pack"
         "body pack";
-    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
 }
-.vagabonds .inventory-wrapper .inventory-container {
 
+.vagabonds .inventory-wrapper .inventory-container {
+    --item-height: 40px;
+    --item-header-height: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.vagabonds .inventory-wrapper .inventory-container .items-header {
+    background: #000;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+    height: var(--item-header-height);
+}
+
+.vagabonds .inventory-wrapper .inventory-container .item {
+    display: flex;
+    /* justify-content: space-between; */
+    padding: 5px;
+    outline: 2px solid #000;
+    outline-offset: -3px;
+    border-radius: 8px;
+}
+
+.vagabonds .inventory-wrapper .inventory-container .item .item-name {
+    display: flex;
+    flex: 1;
+    gap: 4px;
+}
+
+.vagabonds .inventory-wrapper .inventory-container .item .item-image {
+    width: 30px;
+    height: 30px;
 }
