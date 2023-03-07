@@ -148,8 +148,6 @@
         "types": [
             "item",
             "condition",
-            "weapon",
-            "armor",
             "talent",
             "proficiency"
         ],
@@ -168,19 +166,10 @@
         "item": {
             "templates": [
                 "inventoryBase"
-            ]
+            ],
+            "bonus": 0
         },
         "condition": {
-            "templates": [
-                "inventoryBase"
-            ]
-        },
-        "weapon": {
-            "templates": [
-                "inventoryBase"
-            ]
-        },
-        "armor": {
             "templates": [
                 "inventoryBase"
             ]

@@ -304,3 +304,17 @@ form button,
     width: 30px;
     height: 30px;
 }
+
+.sheet header.sheet-header img {
+    height: 100%;
+    flex: 0 0 100px;
+    object-fit: cover;
+}
+
+.input-group .value {
+    display: flex;
+}
+
+.input-group .value div {
+    margin: 0 3px;
+}

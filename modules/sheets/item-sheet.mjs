@@ -9,7 +9,7 @@ export class VagabondsItemSheet extends ItemSheet {
       return mergeObject(super.defaultOptions, {
         classes: ["vagabonds", "sheet", "item"],
         width: 520,
-        height: 180
+        height: 230
       });
     }
   

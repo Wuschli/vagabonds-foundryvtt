@@ -85,7 +85,7 @@ export class VagabondsActor extends Actor {
 
         for (let i of actorData.items) {
             // Append to inventory.
-            if (i.type === 'item' || i.type === 'condition') {
+            if (i.type === 'item' || i.type === 'condition' || i.type === 'weapon' || i.type === 'armor') {
                 inventory[i.system.slot || 'pack'].items.push(i);
             }
         }

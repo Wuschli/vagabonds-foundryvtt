@@ -1,6 +1,42 @@
 <form class="{{cssClass}}" autocomplete="off">
-  <header class="sheet-header">
-    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+  <header class="sheet-header flexrow">
+    <img class="image input-group" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
+    <div class="input-group">
+      <div class="input big">
+        <div class="label">{{localize "VAGABONDS.ItemName"}}</div>
+        <div class="value"><input name="name" type="text" value="{{item.name}}"
+            placeholder="{{localize 'VAGABONDS.ItemName'}}" style="height: auto;" /></div>
+      </div>
+      <div class="seperatorLine"></div>
+
+      <div class="input">
+        <div class="label">{{localize "VAGABONDS.ItemSize"}}</div>
+        <div class="value"><input name="system.size" type="number" value="{{system.size}}" data-dtype="Number" />
+          <div>{{localize "VAGABONDS.Slots"}}</div>
+        </div>
+      </div>
+      <div class="seperatorLine"></div>
+
+      <div class="input">
+        <div class="label">{{localize "VAGABONDS.ItemBonus"}}</div>
+        <div class="value"><input name="system.bonus" type="number" value="{{system.bonus}}" data-dtype="Number" />
+        </div>
+      </div>
+      <div class="seperatorLine"></div>
+
+      <div class="input">
+        <div class="label">{{localize "VAGABONDS.ItemValue"}}</div>
+        <div class="value"><input name="system.pennies.value" type="number" value="{{system.pennies.value}}"
+            data-dtype="Number" />
+          <div>{{localize "VAGABONDS.Pennies"}}</div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+    <!-- <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}" />
     <div class="header-fields">
       <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name" /></h1>
       <div class="grid grid-2col">
@@ -9,11 +45,15 @@
           <input type="text" name="system.size" value="{{system.size}}" data-dtype="Number" />
         </div>
         <div class="resource">
+          <label class="resource-label">Bonus</label>
+          <input type="text" name="system.bonus" value="{{system.bonus}}" data-dtype="Number" />
+        </div>
+        <div class="resource">
           <label class="resource-label">Value</label>
           <input type="text" name="system.pennies.value" value="{{system.pennies.value}}" data-dtype="Number" />
         </div>
       </div>
-    </div>
+    </div> -->
   </header>
 
   {{!-- Sheet Body --}}
