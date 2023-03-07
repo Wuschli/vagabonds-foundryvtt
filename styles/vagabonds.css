@@ -7,7 +7,8 @@
     --color-border-highlight: #888;
 }
 
-.vagabonds.window-app .window-content {
+.vagabonds.window-app .window-content,
+.dialog-content {
     background: white;
     font-family: 'IM Fell DW Pica', serif;
     border-radius: 0;
@@ -22,31 +23,31 @@
     cursor: pointer;
 }
 
-.vagabonds.sheet .input-group {
+.input-group {
     border-radius: 10px;
     border: 2px solid #000;
     overflow: hidden;
 }
 
-.vagabonds.sheet .input-group .input {
+.input-group .input {
     display: flex;
     flex-direction: row;
 }
 
-.vagabonds.sheet .input-group .input .label {
+.input-group .input .label {
     flex: 1;
     text-align: center;
 }
 
-.vagabonds.sheet .input-group .input .value {
+.input-group .input .value {
     flex: 2;
 }
 
-.vagabonds.sheet .input-group .input.big .label {
+.input-group .input.big .label {
     font-size: 1.5rem;
 }
 
-.vagabonds.sheet .input-group .input.big .value {
+.input-group .input.big .value {
     font-size: 1.5rem;
 }
 
@@ -206,8 +207,11 @@
     position: absolute;
 }
 
-.vagabonds .char-header .proficiencies .proficiency {
+.flex50 {
     flex: 0 0 50%;
+}
+
+.proficiency {
     display: flex;
     justify-content: space-between;
     padding: 0 5px;
@@ -276,7 +280,8 @@ form button,
     flex-direction: column;
 }
 
-.vagabonds .inventory-wrapper .inventory-container .items-header {
+.vagabonds .inventory-wrapper .inventory-container .items-header,
+.header {
     background: #000;
     color: #fff;
     display: flex;
@@ -317,4 +322,56 @@ form button,
 
 .input-group .value div {
     margin: 0 3px;
+}
+
+.roll-dialog>* {
+    margin-bottom: 10px;
+}
+
+.roll-dialog [type="checkbox"] {
+    width: 15px;
+    margin: 0 6px;
+    flex: none;
+}
+
+.roll-dialog select {
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: none;
+    border-radius: 0;
+}
+
+.roll-dialog [type="number"] {
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: none;
+    border-radius: 0;
+}
+
+.roll-dialog [type="number"]::-webkit-inner-spin-button {
+    opacity: 1;
+}
+
+.roll-dialog .label {
+    background-color: var(--color-bg-option);
+    padding: 0 3px;
+    flex: auto;
+}
+
+.roll-dialog .proficiency {
+    padding: 0;
+}
+
+.roll-dialog>.flexrow {
+    gap: 6px;
+}
+
+.roll-dialog .input-group {
+    height: min-content;
+}
+
+h3 {
+    border: none;
 }

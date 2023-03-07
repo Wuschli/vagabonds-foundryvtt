@@ -1,6 +1,7 @@
 {
     "VAGABONDS": {
         "Methods": "Methoden",
+        "Method": "Methode",
         "MethodEndure": "aushalten",
         "MethodForce": "erzwingen",
         "MethodFight": "kämpfen",
@@ -46,6 +47,12 @@
         "ItemBonus": "Bonus",
         "ItemValue": "Wert",
         "Pennies": "Pfennig",
-        "Slots": "Plätze"
+        "Slots": "Plätze",
+        "Items": "Gegenstände",
+        "ActionRoll": "Aktionswurf",
+        "Roll": "Würfeln",
+        "Cancel": "Abbrechen",
+        "MethodActionRoll": "{method} Aktionswurf",
+        "Bonus": "Bonus"
     }
 }

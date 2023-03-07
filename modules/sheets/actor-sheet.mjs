@@ -8,7 +8,7 @@ export class VagabondsActorSheet extends ActorSheet {
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
       classes: ["vagabonds", "sheet", "actor"],
-      template: "systems/vagabonds-in-the-wilds/templates/actor/actor-sheet.html",
+      template: "systems/vagabonds-in-the-wilds/templates/actor/actor-sheet.hbs",
       width: 640,
       height: 820,
       tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "inventory" }],
@@ -21,7 +21,7 @@ export class VagabondsActorSheet extends ActorSheet {
 
   /** @override */
   get template() {
-    return `systems/vagabonds-in-the-wilds/templates/actor/actor-${this.actor.type}-sheet.html`;
+    return `systems/vagabonds-in-the-wilds/templates/actor/actor-${this.actor.type}-sheet.hbs`;
   }
 
   /* -------------------------------------------- */
@@ -101,15 +101,6 @@ export class VagabondsActorSheet extends ActorSheet {
     // Iterate through items, allocating to containers
     for (let i of context.items) {
       i.img = i.img || DEFAULT_TOKEN;
-
-      // Append to talents.
-      if (i.type === 'talent') {
-        talents.push(i);
-      }
-      // Append to proficiency.
-      else if (i.type === 'proficiency') {
-        proficiencies.push(i);
-      }
     }
 
     let usedInventory = 0;
@@ -124,9 +115,9 @@ export class VagabondsActorSheet extends ActorSheet {
 
     // Assign and return
     context.inventory = context.system.inventory;
-    context.talents = talents;
+    context.talents = context.system.talents;
     context.conditions = conditions;
-    context.proficiencies = proficiencies;
+    context.proficiencies = context.system.proficiencies;
     context.maxInventoryTotal = maxInventoryTotal;
     context.usedInventory = usedInventory;
 
@@ -177,18 +168,6 @@ export class VagabondsActorSheet extends ActorSheet {
       }
     })
     dragDrop.bind(html.find('.inventory')[0]);
-
-    // Drag events
-    // if (this.actor.isOwner) {
-    //   let dragStartHandler = ev => this._onDragStart(ev);
-    //   // let dragEndHandler = ev => this._onDragEnd(ev);
-    //   html.find('.inventory .item').each((i, li) => {
-    //     if (li.classList.contains("inventory-header")) return;
-    //     li.setAttribute("draggable", true);
-    //     li.addEventListener("dragstart", dragStartHandler, false);
-    //     // li.addEventListener("dragend", dragEndHandler, false);
-    //   });
-    // }
   }
 
   /**
@@ -202,14 +181,17 @@ export class VagabondsActorSheet extends ActorSheet {
     const header = event.currentTarget;
     // Get the type of item to create.
     const type = header.dataset.type;
-    const slot = header.dataset.slot;
 
-    const container = this.actor.system.inventory[slot];
-    let usedSpace = 0;
-    container.items.forEach(i => usedSpace += i.system.size);
-    // console.log(usedSpace + '/' + container.size);
-    if (usedSpace >= container.size)
-      return;
+    if (type != 'proficiency' && type != 'talent') {
+      const slot = header.dataset.slot;
+
+      const container = this.actor.system.inventory[slot];
+      let usedSpace = 0;
+      container.items.forEach(i => usedSpace += i.system.size);
+      // console.log(usedSpace + '/' + container.size);
+      if (usedSpace >= container.size)
+        return;
+    }
 
     // Grab any data associated with this control.
     const data = duplicate(header.dataset);
@@ -241,21 +223,8 @@ export class VagabondsActorSheet extends ActorSheet {
 
     // Handle action rolls
     if (dataset.method) {
-      let rollData = this.actor.getRollData();
-      const diceCount = rollData[dataset.method];
-      let formula = `${diceCount}dv`;
-      if (diceCount < 1)
-        formula = '2dvkl';
-      let roll = new Roll(formula);
-      await roll.evaluate({ async: true });
-
-      // console.log(roll);
-      roll.toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: `${dataset.method} Action Roll`,
-        rollMode: game.settings.get('core', 'rollMode'),
-      });
-      return roll;
+      this.actor.rollMethod(dataset.method);
+      return;
     }
 
     // Handle saving throws

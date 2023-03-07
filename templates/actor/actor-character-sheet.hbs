@@ -8,8 +8,8 @@
             {{!-- Character name --}}
             <div class="input big">
                 <div class="label">{{localize "VAGABONDS.ActorName"}}</div>
-                <div class="value"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'VAGABONDS.ActorName'}}"
-                        style="height: auto;" /></div>
+                <div class="value"><input name="name" type="text" value="{{actor.name}}"
+                        placeholder="{{localize 'VAGABONDS.ActorName'}}" style="height: auto;" /></div>
             </div>
             <div class="seperatorLine"></div>
 
@@ -103,7 +103,7 @@
                 </div>
             </div>
             {{#each proficiencies as |proficiency id|}}
-            <div class="proficiency item" data-item-id="{{proficiency._id}}">
+            <div class="proficiency flex50 item" data-item-id="{{proficiency._id}}">
                 <div class="item-name">{{proficiency.name}}</div>
                 <div class="item-controls">
                     <a class="item-control item-edit" title="{{localize 'VAGABONDS.Edit'}}"><i
@@ -154,7 +154,7 @@
 
         {{!-- Inventory Tab --}}
         <div class="tab inventory" data-group="primary" data-tab="inventory">
-            {{> "systems/vagabonds-in-the-wilds/templates/actor/parts/actor-inventory.html"}}
+            {{> "systems/vagabonds-in-the-wilds/templates/actor/parts/actor-inventory.hbs"}}
         </div>
 
         {{!-- Notes Tab --}}

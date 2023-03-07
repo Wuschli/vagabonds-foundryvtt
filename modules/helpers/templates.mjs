@@ -7,7 +7,7 @@ export const preloadHandlebarsTemplates = async function() {
     return loadTemplates([
   
       // Actor partials.
-      "systems/vagabonds-in-the-wilds/templates/actor/parts/actor-inventory.html",
+      "systems/vagabonds-in-the-wilds/templates/actor/parts/actor-inventory.hbs",
     ]);
   };
   

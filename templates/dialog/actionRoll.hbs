@@ -1,0 +1,51 @@
+<div class="roll-dialog">
+    {{!-- <h2>{{localize 'VAGABONDS.ActionRoll'}}</h2> --}}
+
+    <div class="input-group method">
+        <div class="input big">
+            <div class="label">{{localize 'VAGABONDS.Method'}}</div>
+            <div class="value">
+                <select id="method">
+                    {{#select selectedMethod}}
+                    {{#each system.methods}}
+                    <option value="{{@key}}">{{label}} ({{value}})</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="flexrow">
+        <div class="input-group">
+            <div class="header">{{localize 'VAGABONDS.Proficiencies'}}</div>
+            {{#each system.proficiencies}}
+            <div class="proficiency">
+                <input name="{{name}}" type="checkbox" value="1" id="{{_id}}" />
+                <label for="{{_id}}" class=" label">{{name}}</label>
+            </div>
+            {{/each}}
+        </div>
+
+        <div class="input-group">
+            <div class="header">{{localize 'VAGABONDS.Items'}}</div>
+            {{#each system.inventory}}
+            {{#each items}}
+            {{#if system.bonus}}
+            <div class="proficiency">
+                <input name="{{name}}" type="checkbox" value="{{system.bonus}}" id="{{_id}}" />
+                <label for="{{_id}}" class="label">{{name}} <b>{{bonus system.bonus}}</b></label>
+            </div>
+            {{/if}}
+            {{/each}}
+            {{/each}}
+        </div>
+
+    </div>
+    <div class="input-group">
+        <div class="input big">
+            <div class="label">{{localize 'VAGABONDS.Bonus'}}</div>
+            <input class="value" type="number" id="bonus" value="0" />
+        </div>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 {
     "VAGABONDS": {
         "Methods": "Methods",
+        "Method": "Method",
         "MethodEndure": "endure",
         "MethodForce": "force",
         "MethodFight": "fight",
@@ -46,6 +47,12 @@
         "ItemBonus": "Bonus",
         "ItemValue": "Value",
         "Pennies": "Pennies",
-        "Slots": "Slots"
+        "Slots": "Slots",
+        "Items": "Items",
+        "ActionRoll": "Action Roll",
+        "Roll": "Roll",
+        "Cancel": "Cancel",
+        "MethodActionRoll": "{method} Action Roll",
+        "Bonus": "Bonus"
     }
 }
