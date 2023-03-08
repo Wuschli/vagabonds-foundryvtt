@@ -3,7 +3,7 @@
 
     <div class="input-group method">
         <div class="input big">
-            <div class="label">{{localize 'VAGABONDS.Method'}}</div>
+            <label for="method" class="label">{{localize 'VAGABONDS.Method'}}</label>
             <div class="value">
                 <select id="method">
                     {{#select selectedMethod}}
@@ -44,8 +44,13 @@
     </div>
     <div class="input-group">
         <div class="input big">
-            <div class="label">{{localize 'VAGABONDS.Bonus'}}</div>
+            <label for="bonus" class="label">{{localize 'VAGABONDS.Bonus'}}</label>
             <input class="value" type="number" id="bonus" value="0" />
+        </div>
+        <div class="seperatorLine"></div>
+        <div class="input big">
+            <label for="push" class="label">{{localize 'VAGABONDS.Push'}}</label>
+            <input class="value" type="checkbox" id="push" value="1" />
         </div>
     </div>
 </div>

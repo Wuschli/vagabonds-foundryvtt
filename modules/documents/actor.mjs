@@ -154,7 +154,7 @@ export class VagabondsActor extends Actor {
         data.selectedMethod = method;
         const contentHtml = await renderTemplate('systems/vagabonds-in-the-wilds/templates/dialog/actionRoll.hbs', data);
 
-        console.log(data);
+        // console.log(data);
 
         let d = new Dialog({
             title: game.i18n.localize('VAGABONDS.ActionRoll'),
@@ -164,22 +164,28 @@ export class VagabondsActor extends Actor {
                     icon: '<i class="fas fa-check"></i>',
                     label: game.i18n.localize('VAGABONDS.Roll'),
                     callback: async (html) => {
-                        const method = html.find('[id="method"]')[0].value;
+                        const method = html.find('#method')[0].value;
                         let diceCount = this.system.methods[method].value;
-                        const checkboxes = html.find('[type="checkbox"]');
+                        const checkboxes = html.find('[type="checkbox"]').not('#push');
                         for (const c of checkboxes) {
                             if (c.checked)
                                 diceCount += Number(c.value);
                         }
-                        const bonus = html.find('[id="bonus"]')[0].value;
-                        diceCount += Number(bonus);
-                        // console.log(diceCount);
+                        const bonus = Number(html.find('#bonus')[0].value);
+                        diceCount += bonus;
+
+                        const pushed = html.find('#push')[0].checked;
+                        diceCount += pushed ? CONFIG.VAGABONDS.push.bonus : 0;
 
                         let formula = `${diceCount}dv`;
                         if (diceCount < 1)
                             formula = '2dvkl';
                         let roll = new Roll(formula);
                         await roll.evaluate({ async: true });
+                        if (pushed) {
+                            this.system.fatigue.value += CONFIG.VAGABONDS.push.fatigue;
+                            this.sheet.render();
+                        }
 
                         // console.log(roll);
                         roll.toMessage({

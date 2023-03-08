@@ -53,6 +53,7 @@
         "Roll": "Roll",
         "Cancel": "Cancel",
         "MethodActionRoll": "{method} Action Roll",
-        "Bonus": "Bonus"
+        "Bonus": "Bonus",
+        "Push": "Push Yourself"
     }
 }

@@ -40,3 +40,8 @@ VAGABONDS.containers = {
   "head": "VAGABONDS.ContainerHead",
   "pack": "VAGABONDS.ContainerPack",
 }
+
+VAGABONDS.push = {
+  bonus: 1,
+  fatigue: 2
+};

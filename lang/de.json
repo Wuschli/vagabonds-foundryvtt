@@ -53,6 +53,7 @@
         "Roll": "Würfeln",
         "Cancel": "Abbrechen",
         "MethodActionRoll": "{method} Aktionswurf",
-        "Bonus": "Bonus"
+        "Bonus": "Bonus",
+        "Push": "Alles Geben"
     }
 }
