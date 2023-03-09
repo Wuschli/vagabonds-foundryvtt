@@ -54,6 +54,9 @@
         "Cancel": "Cancel",
         "MethodActionRoll": "{method} Action Roll",
         "Bonus": "Bonus",
-        "Push": "Push Yourself"
+        "Push": "Push Yourself",
+        "AttributeSavingThrow": "{attribute} Saving Throw",
+        "Attribute": "Attribute",
+        "SavingThrow": "Saving Throw"
     }
 }

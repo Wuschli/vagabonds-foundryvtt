@@ -229,21 +229,24 @@ export class VagabondsActorSheet extends ActorSheet {
 
     // Handle saving throws
     if (dataset.attribute) {
-      let rollData = this.actor.getRollData();
-      const diceCount = rollData[dataset.attribute];
-      let formula = `${diceCount}dv`;
-      if (diceCount < 1)
-        formula = '2dvkl';
-      let roll = new Roll(formula);
-      await roll.evaluate({ async: true });
+      this.actor.rollAttribute(dataset.attribute);
+      return;
 
-      // console.log(roll);
-      roll.toMessage({
-        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-        flavor: `${dataset.attribute} Saving Throw`,
-        rollMode: game.settings.get('core', 'rollMode'),
-      });
-      return roll;
+      // let rollData = this.actor.getRollData();
+      // const diceCount = rollData[dataset.attribute];
+      // let formula = `${diceCount}dv`;
+      // if (diceCount < 1)
+      //   formula = '2dvkl';
+      // let roll = new Roll(formula);
+      // await roll.evaluate({ async: true });
+
+      // // console.log(roll);
+      // roll.toMessage({
+      //   speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      //   flavor: `${dataset.attribute} Saving Throw`,
+      //   rollMode: game.settings.get('core', 'rollMode'),
+      // });
+      // return roll;
     }
 
     // Handle item rolls.

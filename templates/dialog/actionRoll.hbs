@@ -1,5 +1,4 @@
 <div class="roll-dialog">
-    {{!-- <h2>{{localize 'VAGABONDS.ActionRoll'}}</h2> --}}
 
     <div class="input-group method">
         <div class="input big">
@@ -27,30 +26,9 @@
             {{/each}}
         </div>
 
-        <div class="input-group">
-            <div class="header">{{localize 'VAGABONDS.Items'}}</div>
-            {{#each system.inventory}}
-            {{#each items}}
-            {{#if system.bonus}}
-            <div class="proficiency">
-                <input name="{{name}}" type="checkbox" value="{{system.bonus}}" id="{{_id}}" />
-                <label for="{{_id}}" class="label">{{name}} <b>{{bonus system.bonus}}</b></label>
-            </div>
-            {{/if}}
-            {{/each}}
-            {{/each}}
-        </div>
+        {{> "systems/vagabonds-in-the-wilds/templates/dialog/parts/items.hbs"}}
 
     </div>
-    <div class="input-group">
-        <div class="input big">
-            <label for="bonus" class="label">{{localize 'VAGABONDS.Bonus'}}</label>
-            <input class="value" type="number" id="bonus" value="0" />
-        </div>
-        <div class="seperatorLine"></div>
-        <div class="input big">
-            <label for="push" class="label">{{localize 'VAGABONDS.Push'}}</label>
-            <input class="value" type="checkbox" id="push" value="1" />
-        </div>
-    </div>
+    {{> "systems/vagabonds-in-the-wilds/templates/dialog/parts/bonus_push.hbs"}}
+
 </div>

@@ -1,3 +1,5 @@
+import { ROLLS } from "../helpers/rolls.mjs";
+
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
  * @extends {Actor}
@@ -150,61 +152,17 @@ export class VagabondsActor extends Actor {
     }
 
     async rollMethod(method) {
-        const data = this.sheet.getData();
-        data.selectedMethod = method;
-        const contentHtml = await renderTemplate('systems/vagabonds-in-the-wilds/templates/dialog/actionRoll.hbs', data);
 
         // console.log(data);
 
-        let d = new Dialog({
-            title: game.i18n.localize('VAGABONDS.ActionRoll'),
-            content: contentHtml,
-            buttons: {
-                roll: {
-                    icon: '<i class="fas fa-check"></i>',
-                    label: game.i18n.localize('VAGABONDS.Roll'),
-                    callback: async (html) => {
-                        const method = html.find('#method')[0].value;
-                        let diceCount = this.system.methods[method].value;
-                        const checkboxes = html.find('[type="checkbox"]').not('#push');
-                        for (const c of checkboxes) {
-                            if (c.checked)
-                                diceCount += Number(c.value);
-                        }
-                        const bonus = Number(html.find('#bonus')[0].value);
-                        diceCount += bonus;
+        let d = await ROLLS.showActionRollDialog(this, method);
+    }
 
-                        const pushed = html.find('#push')[0].checked;
-                        diceCount += pushed ? CONFIG.VAGABONDS.push.bonus : 0;
+    async rollAttribute(attribute) {
 
-                        let formula = `${diceCount}dv`;
-                        if (diceCount < 1)
-                            formula = '2dvkl';
-                        let roll = new Roll(formula);
-                        await roll.evaluate({ async: true });
-                        if (pushed) {
-                            this.system.fatigue.value += CONFIG.VAGABONDS.push.fatigue;
-                            this.sheet.render();
-                        }
+        // console.log(data);
 
-                        // console.log(roll);
-                        roll.toMessage({
-                            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                            flavor: game.i18n.format("VAGABONDS.MethodActionRoll", { method: game.i18n.localize(CONFIG.VAGABONDS.methods[method]) ?? method }),
-                            rollMode: game.settings.get('core', 'rollMode'),
-                        });
-                    }
-                },
-                cancel: {
-                    icon: '<i class="fas fa-times"></i>',
-                    label: game.i18n.localize('VAGABONDS.Cancel'),
-                    callback: (html) => { }
-                }
-            },
-            default: "roll",
-            close: () => { }
-        });
-        d.render(true);
+        let d = await ROLLS.showSavingThrowDialog(this, attribute);
     }
 
 }

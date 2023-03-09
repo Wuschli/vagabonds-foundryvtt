@@ -1,0 +1,23 @@
+<div class="roll-dialog">
+
+    <div class="input-group attribute">
+        <div class="input big">
+            <label for="attribute" class="label">{{localize 'VAGABONDS.Attribute'}}</label>
+            <div class="value">
+                <select id="attribute">
+                    {{#select selectedAttribute}}
+                    {{#each system.attributes}}
+                    <option value="{{@key}}">{{label}} ({{value}})</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="flexrow">
+        {{> "systems/vagabonds-in-the-wilds/templates/dialog/parts/items.hbs"}}
+    </div>
+    {{> "systems/vagabonds-in-the-wilds/templates/dialog/parts/bonus_push.hbs"}}
+
+</div>

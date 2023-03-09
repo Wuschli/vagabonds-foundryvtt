@@ -54,6 +54,9 @@
         "Cancel": "Abbrechen",
         "MethodActionRoll": "{method} Aktionswurf",
         "Bonus": "Bonus",
-        "Push": "Alles Geben"
+        "Push": "Alles Geben",
+        "AttributeSavingThrow": "{attribute} Rettungswurf",
+        "Attribute": "Eigenschaft",
+        "SavingThrow": "Rettungswurf"
     }
 }

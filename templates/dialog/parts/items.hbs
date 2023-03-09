@@ -1,0 +1,13 @@
+<div class="input-group">
+    <div class="header">{{localize 'VAGABONDS.Items'}}</div>
+    {{#each system.inventory}}
+    {{#each items}}
+    {{#if system.bonus}}
+    <div class="proficiency">
+        <input name="{{name}}" type="checkbox" value="{{system.bonus}}" id="{{_id}}" />
+        <label for="{{_id}}" class="label">{{name}} <b>{{bonus system.bonus}}</b></label>
+    </div>
+    {{/if}}
+    {{/each}}
+    {{/each}}
+</div>
