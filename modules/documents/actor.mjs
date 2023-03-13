@@ -65,6 +65,8 @@ export class VagabondsActor extends Actor {
 
         const attributes = systemData.attributes;
         systemData.fatigue.max = attributes.might.value + attributes.finesse.value + attributes.wits.value + attributes.heart.value + (systemData.fatigue.bonus ?? 0);
+        systemData.incapacitated = systemData.fatigue.value >= systemData.fatigue.max;
+        console.log("incapacitated", systemData.incapacitated, actorData.name);
 
         const inventory = {
             hands: {
@@ -163,6 +165,16 @@ export class VagabondsActor extends Actor {
         // console.log(data);
 
         let d = await ROLLS.showSavingThrowDialog(this, attribute);
+    }
+
+    async gainFatigue(amount) {
+        if (this.system.fatigue.value + amount >= this.system.fatigue.max) {
+            /** Incapacitated */
+            await this.update({ system: { fatigue: { value: this.system.fatigue.max } } });
+        }
+        else {
+            await this.update({ system: { fatigue: { value: this.system.fatigue.value + amount } } });
+        }
     }
 
 }

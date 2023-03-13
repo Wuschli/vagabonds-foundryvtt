@@ -143,10 +143,21 @@
 
 .vagabonds .char-header .image {
     grid-area: image;
-    width: 150px;
-    height: auto;
-    max-height: 168px;
-    object-fit: cover;
+    display: flex;
+    position: relative;
+}
+
+.vagabonds .char-header .image img {
+    object-fit: contain;
+    border: none;
+    border-radius: 0;
+}
+
+img.incapacitated {
+    padding: 20%;
+    filter: drop-shadow(0px 0px 10px black);
+    pointer-events: none;
+    position: absolute;
 }
 
 .vagabonds .char-header .fatigue {

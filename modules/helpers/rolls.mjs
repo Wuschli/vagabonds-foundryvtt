@@ -29,7 +29,7 @@ ROLLS.showRollDialog = async function (actor, data, template, title, getDiceCoun
                     let roll = new Roll(formula);
                     await roll.evaluate({ async: true });
                     if (pushed) {
-                        actor.system.fatigue.value += CONFIG.VAGABONDS.push.fatigue;
+                        await actor.gainFatigue?.(CONFIG.VAGABONDS.push.fatigue);
                         actor.sheet.render();
                     }
 

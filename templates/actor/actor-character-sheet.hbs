@@ -88,7 +88,13 @@
         </div>
 
         {{!-- Portrait --}}
-        <img class="image input-group" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="100" />
+        <div class="image input-group">
+            <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" />
+            {{#if actor.system.incapacitated}}
+            {{!-- <img class="incapacitated" src="/systems/vagabonds-in-the-wilds/assets/icons/knockout.svg" /> --}}
+            <img class="incapacitated" src="icons/svg/stoned.svg" />
+            {{/if}}
+        </div>
 
         {{!-- Proficiencies --}}
         <div class="proficiencies input-group">
