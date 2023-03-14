@@ -197,4 +197,10 @@ export class VagabondsActor extends Actor {
         await this.update({ system: { fatigue: { value: value } } });
     }
 
+    async usedMethod(method) {
+        let update = { system: { methods: {} } };
+        update.system.methods[method] = { used: true };
+        await this.update(update);
+    }
+
 }

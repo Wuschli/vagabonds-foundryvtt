@@ -1,6 +1,6 @@
 export const ROLLS = {};
 
-ROLLS.showRollDialog = async function (actor, data, template, title, getDiceCount, getFlavor) {
+ROLLS.showRollDialog = async function (actor, data, template, title, getDiceCount, getFlavor, onDone = null) {
     const contentHtml = await renderTemplate(template, data);
 
     const d = new Dialog({
@@ -39,6 +39,7 @@ ROLLS.showRollDialog = async function (actor, data, template, title, getDiceCoun
                         flavor: getFlavor(html),
                         rollMode: game.settings.get('core', 'rollMode'),
                     });
+                    onDone?.(html);
                 }
             },
             cancel: {
@@ -73,6 +74,10 @@ ROLLS.showActionRollDialog = async function (actor, method) {
         (html) => {
             const method = html.find('#method')[0].value;
             return game.i18n.format("VAGABONDS.MethodActionRoll", { method: game.i18n.localize(CONFIG.VAGABONDS.methods[method]) ?? method })
+        },
+        (html) => {
+            const method = html.find('#method')[0].value;
+            actor.usedMethod(method);
         }
     );
 };
