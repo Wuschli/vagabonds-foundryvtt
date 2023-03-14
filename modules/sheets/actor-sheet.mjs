@@ -106,11 +106,9 @@ export class VagabondsActorSheet extends ActorSheet {
     let usedInventory = 0;
     let maxInventoryTotal = 0;
 
-    for (let [n, c] of Object.entries(context.system.inventory)) {
+    for (let c of Object.values(context.system.inventory)) {
       maxInventoryTotal += c.size;
-      for (let i of c.items) {
-        usedInventory += (i.system.size ?? 0);
-      }
+      usedInventory += c.used;
     }
 
     // Assign and return
@@ -318,22 +316,46 @@ export class VagabondsActorSheet extends ActorSheet {
     const actor = this.actor;
     let sameActor = (data.actorId === actor.id) || (actor.isToken && (data.tokenId === actor.token.id));
 
-    // TODO check if target slot has enough space
+    let slot = event.target.dataset.slot;
 
-    if (sameActor) {
-      // console.log(event, itemData);
-      // return this._onSortItem(event, itemData);
-      return this.moveItemsToSlot([itemData._id], event.target.dataset.slot);
-      // TODO Add item sorting
+    if (!slot) {
+      const parent = $(event.target).parents('.inventory-container')[0];
+      slot = parent?.dataset?.slot;
     }
 
-    return this._onDropItemCreate(itemData, event.target.dataset.slot);
+    if (sameActor) {
+      // console.log(slot, actor, itemData);
+
+      let sameSlot = slot === itemData.system.slot;
+
+      if (sameSlot) {
+        // TODO Add item sorting
+        console.log('same slot. TODO: sorting');
+        return;
+      }
+
+      let container = actor.system.inventory[slot];
+      if (container.size - container.used >= itemData.system.size) // check if enough space is available in container
+        return this.moveItemsToSlot([itemData._id], slot);
+
+      this.showNotEnoughSpaceError(slot);
+      return;
+    }
+
+    return this._onDropItemCreate(itemData, slot);
     // TODO Remove item from previous Actor
   }
 
   /** @override */
   async _onDropItemCreate(itemData, slot) {
     slot = slot || 'pack';
+
+    let container = this.actor.system.inventory[slot];
+    if (container.size - container.used < itemData.system.size) { // check if enough space is available in container
+      this.showNotEnoughSpaceError(slot);
+      return;
+    }
+
     itemData = itemData instanceof Array ? itemData : [itemData];
     const result = await this.actor.createEmbeddedDocuments("Item", itemData);
     await this.moveItemsToSlot(result.map(i => i._id), slot);
@@ -343,5 +365,9 @@ export class VagabondsActorSheet extends ActorSheet {
   async moveItemsToSlot(itemIds, slot) {
     const updates = itemIds.map(id => { return { _id: id, system: { slot: slot } } });
     return this.actor.updateEmbeddedDocuments("Item", updates);
+  }
+
+  showNotEnoughSpaceError(slot) {
+    ui.notifications.error(game.i18n.format("VAGABONDS.ErrorNotEnoughSpace", { slot: game.i18n.localize(CONFIG.VAGABONDS.containers[slot]) ?? slot }));
   }
 }

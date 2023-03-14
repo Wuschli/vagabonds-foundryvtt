@@ -71,18 +71,22 @@ export class VagabondsActor extends Actor {
         const inventory = {
             hands: {
                 size: 2,
+                used: 0,
                 items: [],
             },
             body: {
                 size: 3,
+                used: 0,
                 items: [],
             },
             head: {
                 size: 1,
+                used: 0,
                 items: [],
             },
             pack: {
                 size: 6,
+                used: 0,
                 items: [],
             }
         };
@@ -90,7 +94,9 @@ export class VagabondsActor extends Actor {
         for (let i of actorData.items) {
             // Append to inventory.
             if (i.type === 'item' || i.type === 'condition') {
-                inventory[i.system.slot || 'pack'].items.push(i);
+                const slot = i.system.slot || 'pack';
+                inventory[slot].items.push(i);
+                inventory[slot].used += i.system.size;
             }
             else if (i.type === 'proficiency')
                 systemData.proficiencies.push(i);
@@ -171,15 +177,19 @@ export class VagabondsActor extends Actor {
         return this.setFatigue(this.system.fatigue.value + amount);
     }
 
+    async reduceFatigue(amount) {
+        return this.setFatigue(this.system.fatigue.value - amount);
+    }
+
     async setFatigue(value) {
 
-        if (value >= this.system.fatigue.max) {
-            /** Incapacitated */
-            await this.update({ system: { fatigue: { value: this.system.fatigue.max } } });
-        }
-        else {
-            await this.update({ system: { fatigue: { value: value } } });
-        }
+        if (value < 0)
+            value = 0;
+
+        /** Incapacitated */
+        if (value >= this.system.fatigue.max)
+            value = this.system.fatigue.max;
+        await this.update({ system: { fatigue: { value: value } } });
     }
 
 }

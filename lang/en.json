@@ -57,6 +57,7 @@
         "Push": "Push Yourself",
         "AttributeSavingThrow": "{attribute} Saving Throw",
         "Attribute": "Attribute",
-        "SavingThrow": "Saving Throw"
+        "SavingThrow": "Saving Throw",
+        "ErrorNotEnoughSpace": "Not enough space in {slot}"
     }
 }

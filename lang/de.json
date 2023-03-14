@@ -57,6 +57,7 @@
         "Push": "Alles Geben",
         "AttributeSavingThrow": "{attribute} Rettungswurf",
         "Attribute": "Eigenschaft",
-        "SavingThrow": "Rettungswurf"
+        "SavingThrow": "Rettungswurf",
+        "ErrorNotEnoughSpace": "Nicht mehr genug freier Platz in {slot}"
     }
 }
