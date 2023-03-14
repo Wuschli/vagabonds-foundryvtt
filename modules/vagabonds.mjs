@@ -131,3 +131,21 @@ Hooks.once("diceSoNiceReady", async (dice3d) => {
         system: "vagabonds-in-the-wilds"
     });
 });
+
+
+
+/* -------------------------------------------- */
+/*  Render Character Sheet Hook                 */
+/* -------------------------------------------- */
+
+Hooks.on("renderVagabondsActorSheet", async (app, html, data) => {
+    if (!data.owner || !data.actor || !game.user.isTrusted)
+        return;
+
+    let button = $(`<a class="vagabonds-end-session" title="End Session"><i class="fas fa-right-from-bracket"></i>${game.i18n.localize("VAGABONDS.EndSession")}</a>`);
+    button.click(event => { data.actor.endSession(); });
+
+    html.closest('.app').find('.vagabonds-end-session').remove();
+    let titleElement = html.closest('.app').find('.window-title');
+    if (!app._minimized) button.insertAfter(titleElement);
+});

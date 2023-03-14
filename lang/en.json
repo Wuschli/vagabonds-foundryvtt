@@ -53,12 +53,17 @@
         "ActionRoll": "Action Roll",
         "Roll": "Roll",
         "Cancel": "Cancel",
+        "Apply": "Apply",
         "MethodActionRoll": "{method} Action Roll",
         "Bonus": "Bonus",
         "Push": "Push Yourself",
         "AttributeSavingThrow": "{attribute} Saving Throw",
         "Attribute": "Attribute",
         "SavingThrow": "Saving Throw",
-        "ErrorNotEnoughSpace": "Not enough space in {slot}"
+        "ErrorNotEnoughSpace": "Not enough space in {slot}",
+        "EndSession": "End Session",
+        "NoMethod": "None",
+        "ImproveMethod": "Improve Method",
+        "MethodImproveRoll": "Trying to improve {method}"
     }
 }

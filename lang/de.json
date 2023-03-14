@@ -53,12 +53,17 @@
         "ActionRoll": "Aktionswurf",
         "Roll": "Würfeln",
         "Cancel": "Abbrechen",
+        "Apply": "Anwenden",
         "MethodActionRoll": "{method} Aktionswurf",
         "Bonus": "Bonus",
         "Push": "Alles Geben",
         "AttributeSavingThrow": "{attribute} Rettungswurf",
         "Attribute": "Eigenschaft",
         "SavingThrow": "Rettungswurf",
-        "ErrorNotEnoughSpace": "Nicht mehr genug freier Platz in {slot}"
+        "ErrorNotEnoughSpace": "Nicht mehr genug freier Platz in {slot}",
+        "EndSession": "Session beenden",
+        "NoMethod": "Keine",
+        "ImproveMethod": "Methode steigern",
+        "MethodImproveRoll": "Versuche, {method} zu steigern"
     }
 }

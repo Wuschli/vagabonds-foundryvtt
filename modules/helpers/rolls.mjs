@@ -1,6 +1,6 @@
-export const ROLLS = {};
+export const rolls = {};
 
-ROLLS.showRollDialog = async function (actor, data, template, title, getDiceCount, getFlavor, onDone = null) {
+rolls.showRollDialog = async function (actor, data, template, title, getDiceCount, getFlavor, onDone = null) {
     const contentHtml = await renderTemplate(template, data);
 
     const d = new Dialog({
@@ -57,7 +57,7 @@ ROLLS.showRollDialog = async function (actor, data, template, title, getDiceCoun
     return d;
 };
 
-ROLLS.showActionRollDialog = async function (actor, method) {
+rolls.showActionRollDialog = async function (actor, method) {
 
     const data = actor.sheet.getData();
     data.selectedMethod = method;
@@ -65,7 +65,7 @@ ROLLS.showActionRollDialog = async function (actor, method) {
     return this.showRollDialog(
         actor,
         data,
-        'systems/vagabonds-in-the-wilds/templates/dialog/actionRoll.hbs',
+        'systems/vagabonds-in-the-wilds/templates/dialog/action-roll.hbs',
         'VAGABONDS.ActionRoll',
         (html) => {
             const method = html.find('#method')[0].value;
@@ -82,7 +82,7 @@ ROLLS.showActionRollDialog = async function (actor, method) {
     );
 };
 
-ROLLS.showSavingThrowDialog = async function (actor, attribute) {
+rolls.showSavingThrowDialog = async function (actor, attribute) {
 
     const data = actor.sheet.getData();
     data.selectedAttribute = attribute;
@@ -90,7 +90,7 @@ ROLLS.showSavingThrowDialog = async function (actor, attribute) {
     return this.showRollDialog(
         actor,
         data,
-        'systems/vagabonds-in-the-wilds/templates/dialog/savingThrow.hbs',
+        'systems/vagabonds-in-the-wilds/templates/dialog/saving-throw.hbs',
         'VAGABONDS.SavingThrow',
         (html) => {
             const attribute = html.find('#attribute')[0].value;

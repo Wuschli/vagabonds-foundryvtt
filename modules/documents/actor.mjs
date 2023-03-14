@@ -1,4 +1,5 @@
-import { ROLLS } from "../helpers/rolls.mjs";
+import { rolls } from "../helpers/rolls.mjs";
+import { characterDialogs } from "../helpers/character-dialogs.mjs";
 
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
@@ -168,14 +169,14 @@ export class VagabondsActor extends Actor {
 
         // console.log(data);
 
-        let d = await ROLLS.showActionRollDialog(this, method);
+        let d = await rolls.showActionRollDialog(this, method);
     }
 
     async rollAttribute(attribute) {
 
         // console.log(data);
 
-        let d = await ROLLS.showSavingThrowDialog(this, attribute);
+        let d = await rolls.showSavingThrowDialog(this, attribute);
     }
 
     async gainFatigue(amount) {
@@ -201,6 +202,10 @@ export class VagabondsActor extends Actor {
         let update = { system: { methods: {} } };
         update.system.methods[method] = { used: true };
         await this.update(update);
+    }
+
+    async endSession() {
+        return characterDialogs.showEndSessionDialog(this);
     }
 
 }

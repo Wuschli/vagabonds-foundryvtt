@@ -344,17 +344,17 @@ form button,
     margin: 1px;
 }
 
-.roll-dialog>* {
+.vagabonds-dialog>* {
     margin-bottom: 10px;
 }
 
-.roll-dialog [type="checkbox"] {
+.vagabonds-dialog [type="checkbox"] {
     width: 15px;
     margin: 0 6px;
     flex: none;
 }
 
-.roll-dialog select {
+.vagabonds-dialog select {
     width: 100%;
     height: 100%;
     background: none;
@@ -362,7 +362,7 @@ form button,
     border-radius: 0;
 }
 
-.roll-dialog [type="number"] {
+.vagabonds-dialog [type="number"] {
     width: 100%;
     height: 100%;
     background: none;
@@ -370,25 +370,25 @@ form button,
     border-radius: 0;
 }
 
-.roll-dialog [type="number"]::-webkit-inner-spin-button {
+.vagabonds-dialog [type="number"]::-webkit-inner-spin-button {
     opacity: 1;
 }
 
-.roll-dialog .label {
+.vagabonds-dialog .label {
     background-color: var(--color-bg-option);
     padding: 0 3px;
     flex: auto;
 }
 
-.roll-dialog .proficiency {
+.vagabonds-dialog .proficiency {
     padding: 0;
 }
 
-.roll-dialog>.flexrow {
+.vagabonds-dialog>.flexrow {
     gap: 6px;
 }
 
-.roll-dialog .input-group {
+.vagabonds-dialog .input-group {
     height: min-content;
 }
 
