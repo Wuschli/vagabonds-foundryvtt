@@ -397,7 +397,7 @@ h3 {
 }
 
 .input-group .input [type="checkbox"].value {
-    margin: 0;
+    margin: 3px;
 }
 
 .character {

@@ -79,6 +79,10 @@ Handlebars.registerHelper('bonus', function (number) {
         return `+${number}`;
 });
 
+Handlebars.registerHelper('slot', function (slot) {
+    return game.i18n.localize(CONFIG.VAGABONDS.containers[slot]) ?? slot
+});
+
 Handlebars.registerHelper('repeat', function (n, options) {
     var outStr = '';
 
