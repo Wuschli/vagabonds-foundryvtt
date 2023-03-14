@@ -66,15 +66,30 @@
             {{#each system.attributes}}
             <div class="method attribute rollable" data-attribute="{{@key}}">
                 <div class="method-name label">{{this.label}}</div>
-                <div class="value">{{this.value}}</div>
+                <div class="value">
+                    {{#repeat this.value}}
+                    <div class="bubble filled inverted"></div>
+                    {{/repeat}}
+                    {{#repeat 4 start=this.value}}
+                    <div class="bubble inverted"></div>
+                    {{/repeat}}
+                </div>
             </div>
             {{#each this.methods}}
             <div class="method">
                 <input name="system.methods.{{@key}}.used" class="method-used label" type="checkbox" {{checked
-                    this.used}} />
+                    this.used}}  />
                 <div class="method-name label rollable" data-method="{{@key}}">{{this.label}}</div>
-                <input name="system.methods.{{@key}}.value" class="value" type="number" value="{{this.value}}"
-                    data-dtype="Number" />
+                {{!-- <input name="system.methods.{{@key}}.value" class="value" type="number" value="{{this.value}}"
+                    data-dtype="Number" /> --}}
+                <div class="value">
+                    {{#repeat this.value}}
+                    <div class="bubble filled"></div>
+                    {{/repeat}}
+                    {{#repeat 4 start=this.value}}
+                    <div class="bubble"></div>
+                    {{/repeat}}
+                </div>
             </div>
             {{/each}}
             {{/each}}
@@ -87,11 +102,11 @@
                     {{!-- {{system.fatigue.value}}/{{system.fatigue.max}} --}}
 
                     {{#repeat system.fatigue.value}}
-                    <span class="fatigue-bubble" fatigue="{{this}}">⚫</span>
+                    <div class="bubble filled fatigue-bubble" fatigue="{{this}}"></div>
                     {{/repeat}}
 
                     {{#repeat system.fatigue.max start=system.fatigue.value}}
-                    <span class="fatigue-bubble" fatigue="{{this}}">⚪</span>
+                    <div class="bubble fatigue-bubble" fatigue="{{this}}"></div>
                     {{/repeat}}
 
                 </div>

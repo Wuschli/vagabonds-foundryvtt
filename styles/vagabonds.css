@@ -32,8 +32,8 @@
 .input-group .input {
     display: flex;
     flex-direction: row;
-    align-items: center;
     align-items: stretch;
+    height: auto;
 }
 
 .input-group .input .label {
@@ -110,10 +110,9 @@
 
 .vagabonds .char-header .method .value {
     border: none;
-    flex: 0 0 2em;
-    height: 100%;
     background-color: #fff;
     padding: 1px 3px;
+    align-self: stretch;
 }
 
 .vagabonds .char-header .method .method-used {
@@ -133,6 +132,7 @@
 
 .vagabonds .method.attribute .value {
     background-color: #000;
+    display: flex;
 }
 
 .vagabonds .char-header .description {
@@ -165,11 +165,6 @@ img.incapacitated {
 
 .fatigue-bubble {
     cursor: pointer;
-}
-
-.fatigue .input .value {
-    display: flex;
-    flex-wrap: wrap;
 }
 
 .vagabonds .char-header .attributes {
@@ -340,10 +335,13 @@ form button,
 
 .input-group .value {
     display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    height: auto;
 }
 
 .input-group .value div {
-    margin: 0 3px;
+    margin: 1px;
 }
 
 .roll-dialog>* {
@@ -417,4 +415,29 @@ h3 {
 
 .editor {
     height: 100%;
+}
+
+.bubble {
+    border-radius: 50%;
+    border: 2px solid #000;
+    background-color: #fff;
+    height: 20px;
+    aspect-ratio: 1;
+}
+
+.bubble.filled {
+    background-color: #000;
+}
+
+.bubble.inverted {
+    border-color: #fff;
+    background-color: #000;
+}
+
+.bubble.filled.inverted {
+    background-color: #fff;
+}
+
+.method .bubble {
+    height: 10px;
 }
