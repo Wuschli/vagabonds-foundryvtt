@@ -109,6 +109,7 @@ export class VagabondsActorSheet extends ActorSheet {
     for (let c of Object.values(context.system.inventory)) {
       maxInventoryTotal += c.size;
       usedInventory += c.used;
+      c.freeSpace = (c.size - c.used) > 0;
     }
 
     // Assign and return
@@ -187,11 +188,12 @@ export class VagabondsActorSheet extends ActorSheet {
       const slot = header.dataset.slot;
 
       const container = this.actor.system.inventory[slot];
-      let usedSpace = 0;
-      container.items.forEach(i => usedSpace += i.system.size);
+      let usedSpace = container.used;
       // console.log(usedSpace + '/' + container.size);
-      if (usedSpace >= container.size)
+      if (usedSpace >= container.size) {
+        this.showNotEnoughSpaceWarning(slot);
         return;
+      }
     }
 
     // Grab any data associated with this control.
@@ -338,7 +340,7 @@ export class VagabondsActorSheet extends ActorSheet {
       if (container.size - container.used >= itemData.system.size) // check if enough space is available in container
         return this.moveItemsToSlot([itemData._id], slot);
 
-      this.showNotEnoughSpaceError(slot);
+      this.showNotEnoughSpaceWarning(slot);
       return;
     }
 
@@ -348,12 +350,13 @@ export class VagabondsActorSheet extends ActorSheet {
 
   /** @override */
   async _onDropItemCreate(itemData, slot) {
-    slot = slot || 'pack';
+    slot = slot || 'extra';
 
     let container = this.actor.system.inventory[slot];
-    if (container.size - container.used < itemData.system.size) { // check if enough space is available in container
-      this.showNotEnoughSpaceError(slot);
-      return;
+    if (container.size > 0 && container.size - container.used < itemData.system.size) { // check if enough space is available in container
+      this.showNotEnoughSpaceWarning(slot);
+      slot = 'extra';
+      // return;
     }
 
     itemData = itemData instanceof Array ? itemData : [itemData];
@@ -367,7 +370,9 @@ export class VagabondsActorSheet extends ActorSheet {
     return this.actor.updateEmbeddedDocuments("Item", updates);
   }
 
-  showNotEnoughSpaceError(slot) {
-    ui.notifications.error(game.i18n.format("VAGABONDS.ErrorNotEnoughSpace", { slot: game.i18n.localize(CONFIG.VAGABONDS.containers[slot]) ?? slot }));
+  showNotEnoughSpaceWarning(slot) {
+    if (slot === 'extra')
+      return;
+    ui.notifications.warn(game.i18n.format("VAGABONDS.ErrorNotEnoughSpace", { slot: game.i18n.localize(CONFIG.VAGABONDS.containers[slot]) ?? slot }));
   }
 }

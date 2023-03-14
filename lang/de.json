@@ -39,6 +39,7 @@
         "ContainerHead": "Kopf",
         "ContainerBody": "Körper",
         "ContainerPack": "Rucksack",
+        "ContainerExtra": "Überschuss",
         "Edit": "Bearbeiten",
         "Delete": "Löschen",
         "Create": "Hinzufügen",

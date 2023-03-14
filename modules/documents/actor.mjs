@@ -74,13 +74,13 @@ export class VagabondsActor extends Actor {
                 used: 0,
                 items: [],
             },
-            body: {
-                size: 3,
+            head: {
+                size: 1,
                 used: 0,
                 items: [],
             },
-            head: {
-                size: 1,
+            body: {
+                size: 3,
                 used: 0,
                 items: [],
             },
@@ -88,13 +88,18 @@ export class VagabondsActor extends Actor {
                 size: 6,
                 used: 0,
                 items: [],
+            },
+            extra: {
+                size: 0,
+                used: 0,
+                items: []
             }
         };
 
         for (let i of actorData.items) {
             // Append to inventory.
             if (i.type === 'item' || i.type === 'condition') {
-                const slot = i.system.slot || 'pack';
+                const slot = i.system.slot || 'extra';
                 inventory[slot].items.push(i);
                 inventory[slot].used += i.system.size;
             }

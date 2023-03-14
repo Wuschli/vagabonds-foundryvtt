@@ -3,12 +3,16 @@
   {{#each inventory as |container name|}}
 
   <div class="items-list inventory-container input-group" data-slot="{{name}}"
-    style="grid-area:{{name}}; height: calc({{container.size}} * var(--item-height) + var(--item-header-height) + 4px)">
+    style="min-height: calc({{container.size}} * var(--item-height) + var(--item-header-height))">
     <div class="items-header">
       <div class="item-name">{{container.label}}</div>
       <div class="item-controls">
+
+        {{#if container.freeSpace}}
         <a class="item-control item-create" title="{{localize 'VAGABONDS.Create'}}" data-type="item"
           data-slot="{{name}}"><i class="fas fa-plus"></i></a>
+        {{/if}}
+
       </div>
     </div>
 

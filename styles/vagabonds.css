@@ -290,12 +290,7 @@ form button,
 }
 
 .vagabonds .inventory-wrapper {
-    display: grid !important;
-    grid-template-areas:
-        "hands pack"
-        "head pack"
-        "body pack";
-    grid-template-columns: 1fr 1fr;
+    column-count: 2;
     gap: 6px;
 }
 
@@ -304,6 +299,8 @@ form button,
     --item-header-height: 18px;
     display: flex;
     flex-direction: column;
+    height: fit-content;
+    margin-bottom: 6px;
 }
 
 .vagabonds .inventory-wrapper .inventory-container .items-header,
@@ -318,7 +315,6 @@ form button,
 
 .vagabonds .inventory-wrapper .inventory-container .item {
     display: flex;
-    /* justify-content: space-between; */
     padding: 5px;
     outline: 2px solid #000;
     outline-offset: -3px;
@@ -404,4 +400,21 @@ h3 {
 
 .input-group .input [type="checkbox"].value {
     margin: 0;
+}
+
+.character {
+    display: flex;
+    flex-direction: column;
+}
+
+.character .sheet-body {
+    flex: 1;
+}
+
+.tab.active {
+    height: 100%;
+}
+
+.editor {
+    height: 100%;
 }

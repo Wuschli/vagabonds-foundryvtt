@@ -39,6 +39,7 @@ VAGABONDS.containers = {
   "body": "VAGABONDS.ContainerBody",
   "head": "VAGABONDS.ContainerHead",
   "pack": "VAGABONDS.ContainerPack",
+  "extra": "VAGABONDS.ContainerExtra",
 }
 
 VAGABONDS.push = {

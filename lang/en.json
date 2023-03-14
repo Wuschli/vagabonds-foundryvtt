@@ -39,6 +39,7 @@
         "ContainerHead": "Head",
         "ContainerBody": "Body",
         "ContainerPack": "Backpack",
+        "ContainerExtra": "Excess",
         "Edit": "Edit",
         "Delete": "Delete",
         "Create": "Create",
