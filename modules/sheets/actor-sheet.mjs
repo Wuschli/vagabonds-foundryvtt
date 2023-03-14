@@ -155,6 +155,9 @@ export class VagabondsActorSheet extends ActorSheet {
     // Rollable abilities.
     html.find('.rollable').click(this._onRoll.bind(this));
 
+    // Fatigue click
+    html.find('.fatigue-bubble').click(this._onFatigueClick.bind(this));
+
     const dragDrop = new DragDrop({
       dragSelector: ".item",
       dropSelector: ".inventory-container",
@@ -231,22 +234,6 @@ export class VagabondsActorSheet extends ActorSheet {
     if (dataset.attribute) {
       this.actor.rollAttribute(dataset.attribute);
       return;
-
-      // let rollData = this.actor.getRollData();
-      // const diceCount = rollData[dataset.attribute];
-      // let formula = `${diceCount}dv`;
-      // if (diceCount < 1)
-      //   formula = '2dvkl';
-      // let roll = new Roll(formula);
-      // await roll.evaluate({ async: true });
-
-      // // console.log(roll);
-      // roll.toMessage({
-      //   speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      //   flavor: `${dataset.attribute} Saving Throw`,
-      //   rollMode: game.settings.get('core', 'rollMode'),
-      // });
-      // return roll;
     }
 
     // Handle item rolls.
@@ -270,6 +257,19 @@ export class VagabondsActorSheet extends ActorSheet {
       });
       return roll;
     }
+  }
+
+  /**
+   * Handle clickable fatigue bubbles.
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  async _onFatigueClick(event) {
+    let index = Number(event.target.attributes['fatigue'].value);
+    // console.log(event, index, this);
+    if (index >= this.actor.system.fatigue.value)
+      ++index;
+    await this.actor.setFatigue(index);
   }
 
   // canDragStart(selector) {

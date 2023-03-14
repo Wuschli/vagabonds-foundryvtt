@@ -83,7 +83,18 @@
         <div class="fatigue input-group">
             <div class="input big">
                 <div class="label">{{localize "VAGABONDS.Fatigue"}}</div>
-                <div class="value">{{system.fatigue.value}}/{{system.fatigue.max}}</div>
+                <div class="value">
+                    {{!-- {{system.fatigue.value}}/{{system.fatigue.max}} --}}
+
+                    {{#repeat system.fatigue.value}}
+                    <span class="fatigue-bubble" fatigue="{{this}}">⚫</span>
+                    {{/repeat}}
+
+                    {{#repeat system.fatigue.max start=system.fatigue.value}}
+                    <span class="fatigue-bubble" fatigue="{{this}}">⚪</span>
+                    {{/repeat}}
+
+                </div>
             </div>
         </div>
 

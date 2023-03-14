@@ -79,6 +79,17 @@ Handlebars.registerHelper('bonus', function (number) {
         return `+${number}`;
 });
 
+Handlebars.registerHelper('repeat', function (n, options) {
+    var outStr = '';
+
+    const start = options.hash['start'] ?? 0;
+
+    for (let i = start; i < n; i++) {
+        outStr += options.fn(i);
+    }
+    return outStr;
+});
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */

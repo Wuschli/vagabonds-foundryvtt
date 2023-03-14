@@ -33,11 +33,11 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    align-items: stretch;
 }
 
 .input-group .input .label {
-    flex: 0 0 45%;
-    height: 18px;
+    flex: 0 0 160px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,7 +50,6 @@
 
 .input-group .input.big .label {
     font-size: var(--font-size-20);
-    height: 27px;
 }
 
 .input-group .input.big .value {
@@ -162,6 +161,15 @@ img.incapacitated {
 
 .vagabonds .char-header .fatigue {
     grid-area: fatigue;
+}
+
+.fatigue-bubble {
+    cursor: pointer;
+}
+
+.fatigue .input .value {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .vagabonds .char-header .attributes {
