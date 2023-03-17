@@ -73,6 +73,9 @@
         "TraumaConditionReckless": "Reckless",
         "TraumaConditionSoft": "Soft",
         "TraumaConditionUnstable": "Unstable",
-        "TraumaConditionVicious": "Vicious"
+        "TraumaConditionVicious": "Vicious",
+        "TakeDamage": "Take Damage",
+        "TakeRest": "Take Rest",
+        "CastMagic": "Cast Magic"
     }
 }

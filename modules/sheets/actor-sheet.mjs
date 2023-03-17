@@ -171,6 +171,12 @@ export class VagabondsActorSheet extends ActorSheet {
     // Trauma condition click
     html.find('.trauma-condition').click(this._onTraumaClick.bind(this));
 
+    // Button bar click
+    html.find('#take-damage').click(this._onTakeDamage.bind(this));
+    html.find('#take-rest').click(this._onTakeRest.bind(this));
+    html.find('#cast-magic').click(this._onCastMagic.bind(this));
+    html.find('#end-session').click(this._onEndSession.bind(this));
+
     const dragDrop = new DragDrop({
       dragSelector: ".item",
       dropSelector: ".inventory-container",
@@ -295,6 +301,22 @@ export class VagabondsActorSheet extends ActorSheet {
     let trauma = event.target.attributes['trauma'].value;
     // console.log(event, trauma, this);
     await this.actor.toggleTrauma(trauma);
+  }
+
+  async _onTakeDamage(event) {
+
+  }
+
+  async _onTakeRest(event) {
+
+  }
+
+  async _onCastMagic(event) {
+
+  }
+
+  async _onEndSession(event) {
+    this.actor.endSession();
   }
 
   // canDragStart(selector) {

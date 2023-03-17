@@ -150,7 +150,8 @@
             "item",
             "condition",
             "talent",
-            "proficiency"
+            "proficiency",
+            "wound"
         ],
         "templates": {
             "inventoryBase": {
@@ -171,6 +172,11 @@
             "bonus": 0
         },
         "condition": {
+            "templates": [
+                "inventoryBase"
+            ]
+        },
+        "wound": {
             "templates": [
                 "inventoryBase"
             ]

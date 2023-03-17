@@ -74,6 +74,9 @@
         "TraumaConditionSoft": "Weich",
         "TraumaConditionUnstable": "Instabil",
         "TraumaConditionVicious": "Bösartig",
+        "TakeDamage": "Schaden Erleiden",
+        "TakeRest": "Rast Einlegen",
+        "CastMagic": "Magie Wirken",
         "ItemNames": {
             "longsword": "Langschwert"
         }

@@ -86,7 +86,8 @@
     grid-template-areas:
         "methods description image"
         "methods fatigue fatigue"
-        "methods proficiencies talents";
+        "methods proficiencies talents"
+        "buttons buttons buttons";
 }
 
 .vagabonds .char-header .methods {
@@ -162,6 +163,10 @@ img.incapacitated {
 
 .vagabonds .char-header .fatigue {
     grid-area: fatigue;
+}
+
+.vagabonds .char-header .buttons {
+    grid-area: buttons;
 }
 
 .fatigue-bubble {
@@ -457,4 +462,22 @@ h3 {
 
 .input .value.trauma-conditions .trauma-condition.checked {
     text-decoration: underline;
+}
+
+.input-group .button-bar {
+    display: flex;
+    gap: 3px;
+    padding: 3px;
+}
+
+.input-group .button-bar a {
+    border: 1px solid #000;
+    border-radius: 5px;
+    background: #000;
+    color: #fff;
+    padding: 0 7px;
+}
+
+.input-group .button-bar a:hover {
+    background: #555;
 }
