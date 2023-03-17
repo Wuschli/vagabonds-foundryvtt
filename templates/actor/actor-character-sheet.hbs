@@ -11,7 +11,7 @@
                 <div class="value"><input name="name" type="text" value="{{actor.name}}"
                         placeholder="{{localize 'VAGABONDS.ActorName'}}" style="height: auto;" /></div>
             </div>
-            <div class="seperatorLine"></div>
+            <div class="separatorLine"></div>
 
             {{!-- Background --}}
             <div class="input">
@@ -19,7 +19,7 @@
                 <div class="value"><input name="system.description.background" type="text"
                         value="{{system.description.background}}" placeholder="" data-dtype="String" /></div>
             </div>
-            <div class="seperatorLine"></div>
+            <div class="separatorLine"></div>
 
             {{!-- Physique --}}
             <div class="input">
@@ -27,7 +27,7 @@
                 <div class="value"><input name="system.description.physique" type="text"
                         value="{{system.description.physique}}" placeholder="" data-dtype="String" /></div>
             </div>
-            <div class="seperatorLine"></div>
+            <div class="separatorLine"></div>
 
             {{!-- Mark --}}
             <div class="input">
@@ -35,7 +35,7 @@
                 <div class="value"><input name="system.description.mark" type="text" value="{{system.description.mark}}"
                         placeholder="" data-dtype="String" /></div>
             </div>
-            <div class="seperatorLine"></div>
+            <div class="separatorLine"></div>
 
             {{!-- Clothes --}}
             <div class="input">
@@ -43,7 +43,7 @@
                 <div class="value"><input name="system.description.clothes" type="text"
                         value="{{system.description.clothes}}" placeholder="" data-dtype="String" /></div>
             </div>
-            <div class="seperatorLine"></div>
+            <div class="separatorLine"></div>
 
             {{!-- Personality --}}
             <div class="input">
@@ -51,7 +51,7 @@
                 <div class="value"><input name="system.description.personality" type="text"
                         value="{{system.description.personality}}" placeholder="" data-dtype="String" /></div>
             </div>
-            <div class="seperatorLine"></div>
+            <div class="separatorLine"></div>
 
             {{!-- Motivation --}}
             <div class="input">
@@ -111,6 +111,7 @@
 
                 </div>
             </div>
+            <div class="separatorLine"></div>
             <div class="input big">
                 <div class="label">{{localize "VAGABONDS.Trauma"}}</div>
                 <div class="value trauma-conditions">
@@ -125,10 +126,6 @@
                     </div>
                     {{/if}}
                     {{/each}}
-                    {{!-- {{#each traumaConditions}}
-                    {{log trauma}}
-                    <div class="bubble fatigue-bubble" trauma="{{@key}}"></div>
-                    {{/each}} --}}
                 </div>
             </div>
         </div>
