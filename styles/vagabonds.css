@@ -69,6 +69,7 @@
     background: none;
     background-color: white;
     height: auto;
+    flex: 1;
 }
 
 .vagabonds.sheet .label {

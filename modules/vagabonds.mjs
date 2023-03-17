@@ -94,6 +94,20 @@ Handlebars.registerHelper('repeat', function (n, options) {
     return outStr;
 });
 
+Handlebars.registerHelper('localize', function (key) {
+    if (game.i18n.has(key))
+        return game.i18n.localize(key);
+
+    const itemNameKey = `VAGABONDS.ItemNames.${key}`;
+    if (game.i18n.has(itemNameKey)) {
+        console.log(key, itemNameKey)
+        return game.i18n.localize(itemNameKey);
+    }
+
+    // return game.i18n.localize(key);
+    return key;
+});
+
 /* -------------------------------------------- */
 /*  Ready Hook                                  */
 /* -------------------------------------------- */
@@ -147,7 +161,7 @@ Hooks.on("renderVagabondsActorSheet", async (app, html, data) => {
         return;
 
     let button = $(`<a class="vagabonds-end-session" title="End Session"><i class="fas fa-right-from-bracket"></i>${game.i18n.localize("VAGABONDS.EndSession")}</a>`);
-    button.click(event => { data.actor.endSession(); });
+    button.click(() => { data.actor.endSession(); });
 
     html.closest('.app').find('.vagabonds-end-session').remove();
     let titleElement = html.closest('.app').find('.window-title');

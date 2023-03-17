@@ -64,6 +64,9 @@
         "EndSession": "Session beenden",
         "NoMethod": "Keine",
         "ImproveMethod": "Methode steigern",
-        "MethodImproveRoll": "Versuche, {method} zu steigern"
+        "MethodImproveRoll": "Versuche, {method} zu steigern",
+        "ItemNames": {
+            "longsword": "Langschwert"
+        }
     }
 }
