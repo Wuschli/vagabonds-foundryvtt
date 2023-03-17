@@ -100,7 +100,7 @@ Handlebars.registerHelper('localize', function (key) {
 
     const itemNameKey = `VAGABONDS.ItemNames.${key}`;
     if (game.i18n.has(itemNameKey)) {
-        console.log(key, itemNameKey)
+        // console.log(key, itemNameKey)
         return game.i18n.localize(itemNameKey);
     }
 
@@ -160,7 +160,7 @@ Hooks.on("renderVagabondsActorSheet", async (app, html, data) => {
     if (!data.owner || !data.actor || !game.user.isTrusted)
         return;
 
-    let button = $(`<a class="vagabonds-end-session" title="End Session"><i class="fas fa-right-from-bracket"></i>${game.i18n.localize("VAGABONDS.EndSession")}</a>`);
+    let button = $(`<a class="vagabonds-end-session" title="${game.i18n.localize("VAGABONDS.EndSession")}"><i class="fas fa-right-from-bracket"></i>${game.i18n.localize("VAGABONDS.EndSession")}</a>`);
     button.click(() => { data.actor.endSession(); });
 
     html.closest('.app').find('.vagabonds-end-session').remove();

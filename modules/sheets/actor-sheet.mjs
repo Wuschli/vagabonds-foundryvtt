@@ -96,7 +96,17 @@ export class VagabondsActorSheet extends ActorSheet {
 
     const talents = [];
     const conditions = [];
+    const wounds = []
     const proficiencies = [];
+
+    const traumaConditions = {};
+    for (let t in CONFIG.VAGABONDS.traumaConditions)
+      traumaConditions[t] = {
+        checked: false,
+        label: game.i18n.localize(CONFIG.VAGABONDS.traumaConditions[t] ?? t)
+      }
+    // console.log(context.system.trauma);
+    context.system.trauma.forEach(t => traumaConditions[t].checked = true);
 
     // Iterate through items, allocating to containers
     for (let i of context.items) {
@@ -117,10 +127,11 @@ export class VagabondsActorSheet extends ActorSheet {
     context.talents = context.system.talents;
     context.conditions = conditions;
     context.proficiencies = context.system.proficiencies;
+    context.traumaConditions = traumaConditions;
     context.maxInventoryTotal = maxInventoryTotal;
     context.usedInventory = usedInventory;
 
-    // console.log(context);
+    console.log(context);
   }
 
   /* -------------------------------------------- */
@@ -156,6 +167,9 @@ export class VagabondsActorSheet extends ActorSheet {
 
     // Fatigue click
     html.find('.fatigue-bubble').click(this._onFatigueClick.bind(this));
+
+    // Trauma condition click
+    html.find('.trauma-condition').click(this._onTraumaClick.bind(this));
 
     const dragDrop = new DragDrop({
       dragSelector: ".item",
@@ -270,6 +284,17 @@ export class VagabondsActorSheet extends ActorSheet {
     if (index >= this.actor.system.fatigue.value)
       ++index;
     await this.actor.setFatigue(index);
+  }
+
+  /**
+   * Handle clickable trauma conditions.
+   * @param {Event} event   The originating click event
+   * @private
+   */
+  async _onTraumaClick(event) {
+    let trauma = event.target.attributes['trauma'].value;
+    // console.log(event, trauma, this);
+    await this.actor.toggleTrauma(trauma);
   }
 
   // canDragStart(selector) {

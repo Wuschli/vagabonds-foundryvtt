@@ -137,7 +137,8 @@
                 }
             },
             "proficiencies": [],
-            "talents": []
+            "talents": [],
+            "trauma": []
         },
         "creature": {
             "difficulty": 0,

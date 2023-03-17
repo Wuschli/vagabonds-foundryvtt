@@ -46,3 +46,14 @@ VAGABONDS.push = {
   bonus: 1,
   fatigue: 2
 };
+
+VAGABONDS.traumaConditions = {
+  'cold': "VAGABONDS.TraumaConditionCold",
+  'haunted': "VAGABONDS.TraumaConditionHaunted",
+  'obsessed': "VAGABONDS.TraumaConditionObsessed",
+  'paranoid': "VAGABONDS.TraumaConditionParanoid",
+  'reckless': "VAGABONDS.TraumaConditionReckless",
+  'soft': "VAGABONDS.TraumaConditionSoft",
+  'unstable': "VAGABONDS.TraumaConditionUnstable",
+  'vicious': "VAGABONDS.TraumaConditionVicious"
+}

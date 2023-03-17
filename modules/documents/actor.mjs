@@ -197,6 +197,17 @@ export class VagabondsActor extends Actor {
             value = this.system.fatigue.max;
         await this.update({ system: { fatigue: { value: value } } });
     }
+    async toggleTrauma(name) {
+        let traumas = this.system.trauma;
+        if (traumas.includes(name)) {
+            const index = traumas.indexOf(name);
+            traumas.splice(index, 1);
+        }
+        else {
+            traumas.push(name);
+        }
+        await this.update({ system: { trauma: traumas } });
+    }
 
     async usedMethod(method) {
         let update = { system: { methods: {} } };

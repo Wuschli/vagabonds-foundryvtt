@@ -35,6 +35,7 @@
         "AttributeHeart": "Heart",
         "Proficiencies": "Proficiencies",
         "Talents": "Talents",
+        "Trauma": "Trauma",
         "ContainerHands": "Hands",
         "ContainerHead": "Head",
         "ContainerBody": "Body",
@@ -64,6 +65,14 @@
         "EndSession": "End Session",
         "NoMethod": "None",
         "ImproveMethod": "Improve Method",
-        "MethodImproveRoll": "Trying to improve {method}"
+        "MethodImproveRoll": "Trying to improve {method}",
+        "TraumaConditionCold": "Cold",
+        "TraumaConditionHaunted": "Haunted",
+        "TraumaConditionObsessed": "Obsessed",
+        "TraumaConditionParanoid": "Paranoid",
+        "TraumaConditionReckless": "Reckless",
+        "TraumaConditionSoft": "Soft",
+        "TraumaConditionUnstable": "Unstable",
+        "TraumaConditionVicious": "Vicious"
     }
 }

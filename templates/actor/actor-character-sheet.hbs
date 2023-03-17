@@ -78,7 +78,7 @@
             {{#each this.methods}}
             <div class="method">
                 <input name="system.methods.{{@key}}.used" class="method-used label" type="checkbox" {{checked
-                    this.used}}  />
+                    this.used}} />
                 <div class="method-name label rollable" data-method="{{@key}}">{{this.label}}</div>
                 {{!-- <input name="system.methods.{{@key}}.value" class="value" type="number" value="{{this.value}}"
                     data-dtype="Number" /> --}}
@@ -109,6 +109,26 @@
                     <div class="bubble fatigue-bubble" fatigue="{{this}}"></div>
                     {{/repeat}}
 
+                </div>
+            </div>
+            <div class="input big">
+                <div class="label">{{localize "VAGABONDS.Trauma"}}</div>
+                <div class="value trauma-conditions">
+                    {{#each traumaConditions}}
+                    {{#if this.checked}}
+                    <div class="trauma-condition checked" trauma="{{@key}}" title="{{this.label}}">
+                        {{this.label}}
+                    </div>
+                    {{else}}
+                    <div class="trauma-condition" trauma="{{@key}}" title="{{this.label}}">
+                        {{this.label}}
+                    </div>
+                    {{/if}}
+                    {{/each}}
+                    {{!-- {{#each traumaConditions}}
+                    {{log trauma}}
+                    <div class="bubble fatigue-bubble" trauma="{{@key}}"></div>
+                    {{/each}} --}}
                 </div>
             </div>
         </div>

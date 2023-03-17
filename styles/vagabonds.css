@@ -442,3 +442,19 @@ h3 {
 .method .bubble {
     height: 10px;
 }
+
+.input .value.trauma-conditions {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0 15px;
+}
+
+.input .value.trauma-conditions>.trauma-condition {
+    font-size: var(--font-size-13);
+    cursor: pointer;
+}
+
+.input .value.trauma-conditions .trauma-condition.checked {
+    text-decoration: underline;
+}
