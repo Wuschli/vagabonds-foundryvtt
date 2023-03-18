@@ -226,8 +226,9 @@ export class VagabondsActor extends Actor {
 
         if (type === 'physical') {
             return this.rollAttribute('might', (roll) => {
-                if (roll.total <= 0)
-                    this.rollGainWound();
+                if (roll.total >= 1)
+                    return;
+                this.rollGainWound();
             });
         }
         else if (type === 'mental') {
