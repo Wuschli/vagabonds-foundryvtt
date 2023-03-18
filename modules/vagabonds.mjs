@@ -94,14 +94,17 @@ Handlebars.registerHelper('repeat', function (n, options) {
     return outStr;
 });
 
-Handlebars.registerHelper('localize', function (key) {
+Handlebars.registerHelper('localize', function (key, options) {
+
+    const data = options.hash;
+
     if (game.i18n.has(key))
-        return game.i18n.localize(key);
+        return foundry.utils.isEmpty(data) ? game.i18n.localize(key) : game.i18n.format(key, data);
 
     const itemNameKey = `VAGABONDS.ItemNames.${key}`;
     if (game.i18n.has(itemNameKey)) {
         // console.log(key, itemNameKey)
-        return game.i18n.localize(itemNameKey);
+        return foundry.utils.isEmpty(data) ? game.i18n.localize(itemNameKey) : game.i18n.format(itemNameKey, data);
     }
 
     // return game.i18n.localize(key);

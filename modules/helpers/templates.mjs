@@ -11,6 +11,5 @@ export const preloadHandlebarsTemplates = async function () {
 
     // Dialog partials
     "systems/vagabonds-in-the-wilds/templates/dialog/parts/items.hbs",
-    "systems/vagabonds-in-the-wilds/templates/dialog/parts/bonus_push.hbs",
   ]);
 };
