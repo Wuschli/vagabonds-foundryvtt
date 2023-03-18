@@ -13,11 +13,15 @@
                 </select>
             </div>
         </div>
+        <div class="separator"></div>
+        <div class="input big">
+            <label for="bonus" class="label">{{localize 'VAGABONDS.Bonus'}}</label>
+            <input class="value" type="number" id="bonus" value="0" />
+        </div>
     </div>
 
     <div class="flexrow">
         {{> "systems/vagabonds-in-the-wilds/templates/dialog/parts/items.hbs"}}
     </div>
-    {{> "systems/vagabonds-in-the-wilds/templates/dialog/parts/bonus_push.hbs"}}
 
 </div>
