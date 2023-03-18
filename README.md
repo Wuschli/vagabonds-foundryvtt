@@ -5,3 +5,4 @@ Current Playtest available at https://docs.google.com/document/d/1XPq9vw39SYaKan
 # Licenses
 
 Some artwork copyright Daniel F. Walthall, used with permission.
+Some icons by Lorc (https://lorcblog.blogspot.com/)

@@ -236,7 +236,8 @@ export class VagabondsActor extends Actor {
     }
 
     async rollGainWound() {
-        const woundTable = game.tables.getName('Wounds');
+        const tables = game.packs.get('vagabonds-in-the-wilds.tables');
+        const woundTable = await tables.getDocument("hUnpjrpOydidZ9yU");
         const roll = new Roll(`${this.system.wounds + 1}d6`);
         const woundResult = await woundTable.draw({ roll });
         // console.log(woundResult);

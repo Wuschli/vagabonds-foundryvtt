@@ -24,9 +24,9 @@
     ],
     "packs": [
         {
-            "name": "monsters",
-            "label": "My Monsters",
-            "path": "packs/monsters.db",
+            "name": "adversaries",
+            "label": "Adversaries",
+            "path": "packs/adversaries.db",
             "type": "Actor"
         },
         {
@@ -34,6 +34,12 @@
             "label": "Items",
             "path": "packs/items.db",
             "type": "Item"
+        },
+        {
+            "name": "tables",
+            "label": "Tables",
+            "path": "packs/tables.db",
+            "type": "RollTable"
         }
     ],
     "languages": [
