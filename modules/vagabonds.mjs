@@ -71,7 +71,7 @@ Handlebars.registerHelper('toLowerCase', function (str) {
 });
 
 Handlebars.registerHelper('bonus', function (number) {
-    if (number == 0)
+    if (!number)
         return '';
     else if (number < 0)
         return `-${number}`;
