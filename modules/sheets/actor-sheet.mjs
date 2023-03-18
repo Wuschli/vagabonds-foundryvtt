@@ -1,3 +1,5 @@
+import { characterDialogs } from "../helpers/character-dialogs.mjs";
+
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
@@ -131,7 +133,7 @@ export class VagabondsActorSheet extends ActorSheet {
     context.maxInventoryTotal = maxInventoryTotal;
     context.usedInventory = usedInventory;
 
-    console.log(context);
+    // console.log(context);
   }
 
   /* -------------------------------------------- */
@@ -304,7 +306,7 @@ export class VagabondsActorSheet extends ActorSheet {
   }
 
   async _onTakeDamage(event) {
-
+    return characterDialogs.showTakeDamageDialog(this.actor);
   }
 
   async _onTakeRest(event) {
@@ -316,7 +318,7 @@ export class VagabondsActorSheet extends ActorSheet {
   }
 
   async _onEndSession(event) {
-    this.actor.endSession();
+    return characterDialogs.showEndSessionDialog(this.actor);
   }
 
   // canDragStart(selector) {

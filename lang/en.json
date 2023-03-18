@@ -76,6 +76,10 @@
         "TraumaConditionVicious": "Vicious",
         "TakeDamage": "Take Damage",
         "TakeRest": "Take Rest",
-        "CastMagic": "Cast Magic"
+        "CastMagic": "Cast Magic",
+        "DamageType": "Damage Type",
+        "DamageTypePhysical": "Physical",
+        "DamageTypeMental": "Mental",
+        "DamageAmount": "Damage Amount"
     }
 }

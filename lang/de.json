@@ -77,6 +77,10 @@
         "TakeDamage": "Schaden Erleiden",
         "TakeRest": "Rast Einlegen",
         "CastMagic": "Magie Wirken",
+        "DamageType": "Schadensart",
+        "DamageTypePhysical": "Physisch",
+        "DamageTypeMental": "Mental",
+        "DamageAmount": "Schadenshöhe",
         "ItemNames": {
             "longsword": "Langschwert"
         }

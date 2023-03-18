@@ -1,5 +1,4 @@
 import { rolls } from "../helpers/rolls.mjs";
-import { characterDialogs } from "../helpers/character-dialogs.mjs";
 
 /**
  * Extend the base Actor document by defining a custom roll data structure which is ideal for the Simple system.
@@ -197,6 +196,7 @@ export class VagabondsActor extends Actor {
             value = this.system.fatigue.max;
         await this.update({ system: { fatigue: { value: value } } });
     }
+
     async toggleTrauma(name) {
         let traumas = this.system.trauma;
         if (traumas.includes(name)) {
@@ -215,8 +215,16 @@ export class VagabondsActor extends Actor {
         await this.update(update);
     }
 
-    async endSession() {
-        return characterDialogs.showEndSessionDialog(this);
-    }
+    async takeDamage(type, amount) {
+        await this.gainFatigue(amount);
+        if (this.system.fatigue.value < this.system.fatigue.max)
+            return;
 
+        if (type === 'physical') {
+            return this.rollAttribute('might');
+        }
+        else if (type === 'mental') {
+            return this.rollAttribute('wits');
+        }
+    }
 }
