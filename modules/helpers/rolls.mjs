@@ -20,7 +20,7 @@ rolls.showRollDialog = async function (actor, data, template, title, getDiceCoun
                     const bonus = Number(html.find('#bonus')[0].value);
                     diceCount += bonus;
 
-                    const pushed = html.find('#push')[0].checked;
+                    const pushed = html.find('#push')[0]?.checked;
                     diceCount += pushed ? CONFIG.VAGABONDS.push.bonus : 0;
 
                     let formula = `${diceCount}dv`;
@@ -39,7 +39,7 @@ rolls.showRollDialog = async function (actor, data, template, title, getDiceCoun
                         flavor: getFlavor(html),
                         rollMode: game.settings.get('core', 'rollMode'),
                     });
-                    onDone?.(html);
+                    onDone?.(html, roll);
                 }
             },
             cancel: {
@@ -57,7 +57,7 @@ rolls.showRollDialog = async function (actor, data, template, title, getDiceCoun
     return d;
 };
 
-rolls.showActionRollDialog = async function (actor, method) {
+rolls.showActionRollDialog = async function (actor, method, onDone = null) {
 
     const data = actor.sheet.getData();
     data.selectedMethod = method;
@@ -75,14 +75,15 @@ rolls.showActionRollDialog = async function (actor, method) {
             const method = html.find('#method')[0].value;
             return game.i18n.format("VAGABONDS.MethodActionRoll", { method: game.i18n.localize(CONFIG.VAGABONDS.methods[method]) ?? method })
         },
-        (html) => {
+        (html, roll) => {
             const method = html.find('#method')[0].value;
             actor.usedMethod(method);
+            onDone?.(roll);
         }
     );
 };
 
-rolls.showSavingThrowDialog = async function (actor, attribute) {
+rolls.showSavingThrowDialog = async function (actor, attribute, onDone = null) {
 
     const data = actor.sheet.getData();
     data.selectedAttribute = attribute;
@@ -99,6 +100,9 @@ rolls.showSavingThrowDialog = async function (actor, attribute) {
         (html) => {
             const attribute = html.find('#attribute')[0].value;
             return game.i18n.format("VAGABONDS.AttributeSavingThrow", { attribute: game.i18n.localize(CONFIG.VAGABONDS.attributes[attribute]) ?? attribute })
+        },
+        (html, roll) => {
+            onDone?.(roll);
         }
     );
 };

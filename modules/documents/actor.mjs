@@ -96,17 +96,21 @@ export class VagabondsActor extends Actor {
             }
         };
 
+        systemData.wounds = 0;
+
         for (let i of actorData.items) {
             // Append to inventory.
-            if (i.type === 'item' || i.type === 'condition') {
+            if (i.type === 'item' || i.type === 'condition' || i.type === 'wound') {
                 const slot = i.system.slot || 'extra';
                 inventory[slot].items.push(i);
                 inventory[slot].used += i.system.size;
             }
-            else if (i.type === 'proficiency')
+            if (i.type === 'proficiency')
                 systemData.proficiencies.push(i);
-            else if (i.type === 'talents')
+            if (i.type === 'talent')
                 systemData.talents.push(i);
+            if (i.type === 'wound')
+                systemData.wounds += 1;
         }
         systemData.inventory = inventory;
     }
@@ -164,18 +168,18 @@ export class VagabondsActor extends Actor {
         // Process additional NPC data here.
     }
 
-    async rollMethod(method) {
+    async rollMethod(method, onDone = null) {
 
         // console.log(data);
 
-        let d = await rolls.showActionRollDialog(this, method);
+        let d = await rolls.showActionRollDialog(this, method, onDone);
     }
 
-    async rollAttribute(attribute) {
+    async rollAttribute(attribute, onDone = null) {
 
         // console.log(data);
 
-        let d = await rolls.showSavingThrowDialog(this, attribute);
+        let d = await rolls.showSavingThrowDialog(this, attribute, onDone);
     }
 
     async gainFatigue(amount) {
@@ -221,10 +225,28 @@ export class VagabondsActor extends Actor {
             return;
 
         if (type === 'physical') {
-            return this.rollAttribute('might');
+            return this.rollAttribute('might', (roll) => {
+                if (roll.total <= 0)
+                    this.rollGainWound();
+            });
         }
         else if (type === 'mental') {
             return this.rollAttribute('wits');
         }
+    }
+
+    async rollGainWound() {
+        const woundTable = game.tables.getName('Wounds');
+        const roll = new Roll(`${this.system.wounds + 1}d6`);
+        const woundResult = await woundTable.draw({ roll });
+        // console.log(woundResult);
+        for (const r of woundResult.results) {
+            if (r.documentCollection === "Item") {
+                const item = game.items.get(r.documentId);
+                // console.log(item);
+                await this.createEmbeddedDocuments('Item', [item]);
+            }
+        }
+        return woundResult;
     }
 }
