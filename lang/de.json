@@ -81,6 +81,7 @@
         "DamageTypePhysical": "Physisch",
         "DamageTypeMental": "Mental",
         "DamageAmount": "Schadenshöhe",
+        "GainTraumaCondition": "Erhalte einen Traumazustand",
         "ItemNames": {
             "longsword": "Langschwert"
         }

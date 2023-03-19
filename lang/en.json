@@ -80,6 +80,7 @@
         "DamageType": "Damage Type",
         "DamageTypePhysical": "Physical",
         "DamageTypeMental": "Mental",
-        "DamageAmount": "Damage Amount"
+        "DamageAmount": "Damage Amount",
+        "GainTraumaCondition": "Gain a trauma condition"
     }
 }

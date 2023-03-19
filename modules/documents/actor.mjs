@@ -232,7 +232,14 @@ export class VagabondsActor extends Actor {
             });
         }
         else if (type === 'mental') {
-            return this.rollAttribute('wits');
+            return this.rollAttribute('wits', (roll) => {
+                if (roll.total >= 1)
+                    return;
+                ChatMessage.create({
+                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                    content: game.i18n.localize("VAGABONDS.GainTraumaCondition")
+                });
+            });
         }
     }
 
