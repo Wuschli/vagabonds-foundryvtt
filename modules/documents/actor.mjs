@@ -243,8 +243,15 @@ export class VagabondsActor extends Actor {
         const woundResult = await woundTable.draw({ roll });
         // console.log(woundResult);
         for (const r of woundResult.results) {
-            if (r.documentCollection === "Item") {
-                const item = game.items.get(r.documentId);
+
+            let collection = null;
+            if (r.documentCollection === "Item")
+                collection = game.items;
+            else if (r.documentCollection === 'vagabonds-in-the-wilds.items')
+                collection = game.packs.get(r.documentCollection);
+
+            if (collection) {
+                const item = await collection.getDocument(r.documentId);
                 // console.log(item);
                 await this.createEmbeddedDocuments('Item', [item]);
             }
