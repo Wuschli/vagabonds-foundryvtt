@@ -40,6 +40,12 @@
             "label": "Tables",
             "path": "packs/tables.db",
             "type": "RollTable"
+        },
+        {
+            "name": "proficiencies",
+            "label": "Proficiencies",
+            "path": "packs/proficiencies.db",
+            "type": "Item"
         }
     ],
     "languages": [
