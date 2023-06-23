@@ -47,6 +47,13 @@ Hooks.once('init', async function () {
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("vagabonds", VagabondsItemSheet, { makeDefault: true });
 
+    // Register Babele
+
+    if (typeof Babele !== 'undefined') {
+        Babele.get().setSystemTranslationsDir('lang');
+
+    }
+
     // Preload Handlebars templates.
     return preloadHandlebarsTemplates();
 });

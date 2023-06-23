@@ -1,0 +1,21 @@
+{
+	"label": "Items",
+	"entries": {
+		"Deep Wound": {
+			"name": "Tiefe Wunde",
+			"description": ""
+		},
+		"Infected Wound": {
+			"name": "Infizierte Wunde",
+			"description": ""
+		},
+		"Internal Wound": {
+			"name": "Innere Wunde",
+			"description": ""
+		},
+		"Superficial Wound": {
+			"name": "Oberflächliche Wunde",
+			"description": ""
+		}
+	}
+}
