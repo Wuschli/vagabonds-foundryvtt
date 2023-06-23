@@ -69,12 +69,6 @@ export class VagabondsActorSheet extends ActorSheet {
    */
   _prepareCharacterData(context) {
     const systemData = context.system;
-    // Handle method labels and attribute grouping.
-    for (let [k, method] of Object.entries(systemData.methods)) {
-      method.label = game.i18n.localize(CONFIG.VAGABONDS.methods[k]) ?? k;
-
-      systemData.attributes[method.attribute].methods[k] = method;
-    }
 
     // Handle attribute labels.
     for (let [k, attribute] of Object.entries(systemData.attributes)) {
@@ -101,15 +95,6 @@ export class VagabondsActorSheet extends ActorSheet {
     const wounds = []
     const proficiencies = [];
 
-    const traumaConditions = {};
-    for (let t in CONFIG.VAGABONDS.traumaConditions)
-      traumaConditions[t] = {
-        checked: false,
-        label: game.i18n.localize(CONFIG.VAGABONDS.traumaConditions[t] ?? t)
-      }
-    // console.log(context.system.trauma);
-    context.system.trauma.forEach(t => traumaConditions[t].checked = true);
-
     // Iterate through items, allocating to containers
     for (let i of context.items) {
       i.img = i.img || DEFAULT_TOKEN;
@@ -129,7 +114,6 @@ export class VagabondsActorSheet extends ActorSheet {
     context.talents = context.system.talents;
     context.conditions = conditions;
     context.proficiencies = context.system.proficiencies;
-    context.traumaConditions = traumaConditions;
     context.maxInventoryTotal = maxInventoryTotal;
     context.usedInventory = usedInventory;
 
@@ -170,14 +154,10 @@ export class VagabondsActorSheet extends ActorSheet {
     // Fatigue click
     html.find('.fatigue-bubble').click(this._onFatigueClick.bind(this));
 
-    // Trauma condition click
-    html.find('.trauma-condition').click(this._onTraumaClick.bind(this));
-
     // Button bar click
     html.find('#take-damage').click(this._onTakeDamage.bind(this));
     html.find('#take-rest').click(this._onTakeRest.bind(this));
     html.find('#cast-magic').click(this._onCastMagic.bind(this));
-    html.find('#end-session').click(this._onEndSession.bind(this));
 
     const dragDrop = new DragDrop({
       dragSelector: ".item",
@@ -246,15 +226,16 @@ export class VagabondsActorSheet extends ActorSheet {
     const element = event.currentTarget;
     const dataset = element.dataset;
 
+    // TODO two different buttons
     // Handle action rolls
-    if (dataset.method) {
-      this.actor.rollMethod(dataset.method);
+    if (dataset.attribute) {
+      this.actor.rollAction(dataset.attribute);
       return;
     }
 
     // Handle saving throws
     if (dataset.attribute) {
-      this.actor.rollAttribute(dataset.attribute);
+      this.actor.rollSave(dataset.attribute);
       return;
     }
 
@@ -294,17 +275,6 @@ export class VagabondsActorSheet extends ActorSheet {
     await this.actor.setFatigue(index);
   }
 
-  /**
-   * Handle clickable trauma conditions.
-   * @param {Event} event   The originating click event
-   * @private
-   */
-  async _onTraumaClick(event) {
-    let trauma = event.target.attributes['trauma'].value;
-    // console.log(event, trauma, this);
-    await this.actor.toggleTrauma(trauma);
-  }
-
   async _onTakeDamage(event) {
     return characterDialogs.showTakeDamageDialog(this.actor);
   }
@@ -315,10 +285,6 @@ export class VagabondsActorSheet extends ActorSheet {
 
   async _onCastMagic(event) {
 
-  }
-
-  async _onEndSession(event) {
-    return characterDialogs.showEndSessionDialog(this.actor);
   }
 
   // canDragStart(selector) {

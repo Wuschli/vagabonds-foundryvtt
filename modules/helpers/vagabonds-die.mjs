@@ -12,7 +12,6 @@ export class VagabondsDie extends Die {
         let _total = 0;
         this.results.forEach(d => {
             if (!d.active) return;
-            if (d.result == 5) _total += 0.5;
             if (d.result == 6) _total += 1;
         });
         return _total;
@@ -20,12 +19,10 @@ export class VagabondsDie extends Die {
     // /** @override */
     // get flavor() {
     //     let _successes = 0;
-    //     let _partials = 0;
     //     this.results.forEach(d => {
-    //         if (d.result == 5) ++_partials;
     //         if (d.result == 6) ++_successes;
     //     });
-    //     return `${_successes} Successes and ${_partials} Partial Successes`;
+    //     return `${_successes} Successes`;
     // }
 
     /** @override */
@@ -53,8 +50,6 @@ export class VagabondsDie extends Die {
         if (result.discarded)
             r.push('discarded');
         else {
-            if (result.result == 5)
-                r.push('partial');
             if (result.result == 6)
                 r.push('success');
         }

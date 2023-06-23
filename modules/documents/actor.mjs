@@ -35,7 +35,7 @@ export class VagabondsActor extends Actor {
         const systemData = actorData.system;
         const flags = actorData.flags.boilerplate || {};
 
-        // Make separate methods for each Actor type (character, npc, etc.) to keep
+        // Make separate attributes for each Actor type (character, npc, etc.) to keep
         // things organized.
         this._prepareCharacterData(actorData);
         this._prepareNpcData(actorData);
@@ -50,21 +50,8 @@ export class VagabondsActor extends Actor {
         // Make modifications to data here. For example:
         const systemData = actorData.system;
 
-        systemData.attributes = {
-            "might": { value: 0, methods: {} },
-            "finesse": { value: 0, methods: {} },
-            "wits": { value: 0, methods: {} },
-            "heart": { value: 0, methods: {} }
-        };
-
-        // Loop through method scores, and calculate attribute scores.
-        for (let [key, method] of Object.entries(systemData.methods)) {
-            if (method.value > 0)
-                systemData.attributes[method.attribute].value++;
-        }
-
         const attributes = systemData.attributes;
-        systemData.fatigue.max = attributes.might.value + attributes.finesse.value + attributes.wits.value + attributes.heart.value + (systemData.fatigue.bonus ?? 0);
+        systemData.fatigue.max = (attributes.might.value + attributes.finesse.value + attributes.wits.value + attributes.heart.value + attributes.shadow.value) / 2;
         systemData.incapacitated = systemData.fatigue.value >= systemData.fatigue.max;
         // console.log("incapacitated", systemData.incapacitated, actorData.name);
 
@@ -147,11 +134,6 @@ export class VagabondsActor extends Actor {
 
         // Copy the scores to the top level, so that rolls can use
         // formulas like `@str.mod + 4`.
-        if (data.methods) {
-            for (let [k, v] of Object.entries(data.methods)) {
-                data[k] = v.value;
-            }
-        }
         if (data.attributes) {
             for (let [k, v] of Object.entries(data.attributes)) {
                 data[k] = v.value;
@@ -168,14 +150,14 @@ export class VagabondsActor extends Actor {
         // Process additional NPC data here.
     }
 
-    async rollMethod(method, onDone = null) {
+    async rollAction(attribute, onDone = null) {
 
         // console.log(data);
 
-        let d = await rolls.showActionRollDialog(this, method, onDone);
+        let d = await rolls.showActionRollDialog(this, attribute, onDone);
     }
 
-    async rollAttribute(attribute, onDone = null) {
+    async rollSave(attribute, onDone = null) {
 
         // console.log(data);
 
@@ -201,46 +183,16 @@ export class VagabondsActor extends Actor {
         await this.update({ system: { fatigue: { value: value } } });
     }
 
-    async toggleTrauma(name) {
-        let traumas = this.system.trauma;
-        if (traumas.includes(name)) {
-            const index = traumas.indexOf(name);
-            traumas.splice(index, 1);
-        }
-        else {
-            traumas.push(name);
-        }
-        await this.update({ system: { trauma: traumas } });
-    }
-
-    async usedMethod(method) {
-        let update = { system: { methods: {} } };
-        update.system.methods[method] = { used: true };
-        await this.update(update);
-    }
-
-    async takeDamage(type, amount) {
+    async takeDamage(amount) {
         await this.gainFatigue(amount);
         if (this.system.fatigue.value < this.system.fatigue.max)
             return;
 
-        if (type === 'physical') {
-            return this.rollAttribute('might', (roll) => {
-                if (roll.total >= 1)
-                    return;
-                this.rollGainWound();
-            });
-        }
-        else if (type === 'mental') {
-            return this.rollAttribute('wits', (roll) => {
-                if (roll.total >= 1)
-                    return;
-                ChatMessage.create({
-                    speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-                    content: game.i18n.localize("VAGABONDS.GainTraumaCondition")
-                });
-            });
-        }
+        return this.rollSave('might', (roll) => {
+            if (roll.total >= 1)
+                return;
+            this.rollGainWound();
+        });
     }
 
     async rollGainWound() {

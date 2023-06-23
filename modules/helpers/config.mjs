@@ -1,29 +1,6 @@
 export const VAGABONDS = {};
 
 /**
- * The set of Method Scores used within the sytem.
- * @type {Object}
- */
-VAGABONDS.methods = {
-  "endure": "VAGABONDS.MethodEndure",
-  "force": "VAGABONDS.MethodForce",
-  "fight": "VAGABONDS.MethodFight",
-  "wreck": "VAGABONDS.MethodWreck",
-  "tinker": "VAGABONDS.MethodTinker",
-  "move": "VAGABONDS.MethodMove",
-  "shoot": "VAGABONDS.MethodShoot",
-  "conceal": "VAGABONDS.MethodConceal",
-  "spy": "VAGABONDS.MethodSpy",
-  "assess": "VAGABONDS.MethodAssess",
-  "survive": "VAGABONDS.MethodSurvive",
-  "know": "VAGABONDS.MethodKnow",
-  "sway": "VAGABONDS.MethodSway",
-  "nurse": "VAGABONDS.MethodNurse",
-  "consort": "VAGABONDS.MethodConsort",
-  "parley": "VAGABONDS.MethodParley",
-};
-
-/**
  * The set of Attribute Scores used within the sytem.
  * @type {Object}
  */
@@ -32,6 +9,7 @@ VAGABONDS.attributes = {
   "finesse": "VAGABONDS.AttributeFinesse",
   "wits": "VAGABONDS.AttributeWits",
   "heart": "VAGABONDS.AttributeHeart",
+  "shadow": "VAGABONDS.AttributeShadow",
 };
 
 VAGABONDS.containers = {
@@ -43,17 +21,6 @@ VAGABONDS.containers = {
 }
 
 VAGABONDS.push = {
-  bonus: 1,
+  bonus: 2,
   fatigue: 2
 };
-
-VAGABONDS.traumaConditions = {
-  'cold': "VAGABONDS.TraumaConditionCold",
-  'haunted': "VAGABONDS.TraumaConditionHaunted",
-  'obsessed': "VAGABONDS.TraumaConditionObsessed",
-  'paranoid': "VAGABONDS.TraumaConditionParanoid",
-  'reckless': "VAGABONDS.TraumaConditionReckless",
-  'soft': "VAGABONDS.TraumaConditionSoft",
-  'unstable': "VAGABONDS.TraumaConditionUnstable",
-  'vicious': "VAGABONDS.TraumaConditionVicious"
-}

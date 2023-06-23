@@ -84,20 +84,20 @@
     column-gap: 10px;
     row-gap: 10px;
     grid-template-areas:
-        "methods description image"
-        "methods fatigue fatigue"
-        "methods proficiencies talents"
+        "attributes description image"
+        "attributes fatigue fatigue"
+        "attributes proficiencies talents"
         "buttons buttons buttons";
 }
 
-.vagabonds .char-header .methods {
-    grid-area: methods;
+.vagabonds .char-header .attributes {
+    grid-area: attributes;
     display: flex;
     flex-direction: column;
     height: min-content;
 }
 
-.vagabonds .char-header .method {
+.vagabonds .char-header .attribute {
     display: flex;
     flex-direction: row;
     justify-items: center;
@@ -106,35 +106,20 @@
     padding: 0 0 0 3px;
 }
 
-.vagabonds .char-header .method .method-name {
-    flex: 1;
+.vagabonds .char-header .attribute .attribute-name {
+    flex: 6;
 }
 
-.vagabonds .char-header .method .value {
+.vagabonds .char-header .attribute .value {
     border: none;
     background-color: #fff;
     padding: 1px 3px;
     align-self: stretch;
+    flex: 1.5;
 }
 
-.vagabonds .char-header .method .method-used {
-    margin: 0 3px 0 0;
-    width: 15px;
-    flex: none;
-}
-
-.vagabonds .method.attribute {
-    background-color: #000;
-    color: #ddd;
-}
-
-.vagabonds .method.attribute .label {
-    background-color: #000;
-}
-
-.vagabonds .method.attribute .value {
-    background-color: #000;
-    display: flex;
+.vagabonds .attribute .value input {
+    text-align: center;
 }
 
 .vagabonds .char-header .description {
@@ -173,6 +158,14 @@ img.incapacitated {
     cursor: pointer;
 }
 
+.vagabonds .char-header .fatigue .value input {
+    text-align: right;
+}
+
+.vagabonds .char-header .fatigue .value p {
+    flex: 1
+}
+
 .vagabonds .char-header .attributes {
     grid-area: attributes;
 }
@@ -185,6 +178,7 @@ img.incapacitated {
     align-content: flex-start;
     position: relative;
     min-width: 250px;
+    min-height: 150px;
 }
 
 .vagabonds .char-header .talents {
@@ -269,11 +263,6 @@ img.incapacitated {
 
 .dice-roll .dice-tooltip {
     display: block;
-}
-
-.dice-tooltip .dice-rolls .roll.partial {
-    color: #52470b;
-    filter: sepia(0.5) hue-rotate(0deg);
 }
 
 .chat-message,
@@ -459,30 +448,6 @@ h3 {
 
 .bubble.filled.inverted {
     background-color: #fff;
-}
-
-.method .bubble {
-    height: 10px;
-}
-
-.input .value.trauma-conditions {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0 10px;
-    padding: 0px 5px;
-}
-
-.input .value.trauma-conditions>.trauma-condition {
-    font-size: var(--font-size-13);
-    cursor: pointer;
-    padding: 0 3px;
-    margin: 2px;
-}
-
-.input .value.trauma-conditions .trauma-condition.checked {
-    outline: 1px solid #000;
-    border-radius: 10px;
 }
 
 .buttons .button-bar {

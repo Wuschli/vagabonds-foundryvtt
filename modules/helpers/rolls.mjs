@@ -57,10 +57,10 @@ rolls.showRollDialog = async function (actor, data, template, title, getDiceCoun
     return d;
 };
 
-rolls.showActionRollDialog = async function (actor, method, onDone = null) {
+rolls.showActionRollDialog = async function (actor, attribute, onDone = null) {
 
     const data = actor.sheet.getData();
-    data.selectedMethod = method;
+    data.selectedAttribute = attribute;
 
     return this.showRollDialog(
         actor,
@@ -68,16 +68,14 @@ rolls.showActionRollDialog = async function (actor, method, onDone = null) {
         'systems/vagabonds-in-the-wilds/templates/dialog/action-roll.hbs',
         'VAGABONDS.ActionRoll',
         (html) => {
-            const method = html.find('#method')[0].value;
-            return actor.system.methods[method].value;
+            const attribute = html.find('#attribute')[0].value;
+            return actor.system.attributes[attribute].value;
         },
         (html) => {
-            const method = html.find('#method')[0].value;
-            return game.i18n.format("VAGABONDS.MethodActionRoll", { method: game.i18n.localize(CONFIG.VAGABONDS.methods[method]) ?? method })
+            const attribute = html.find('#attribute')[0].value;
+            return game.i18n.format("VAGABONDS.AttributeActionRoll", { attribute: game.i18n.localize(CONFIG.VAGABONDS.attributes[attribute]) ?? attribute })
         },
         (html, roll) => {
-            const method = html.find('#method')[0].value;
-            actor.usedMethod(method);
             onDone?.(roll);
         }
     );

@@ -61,37 +61,16 @@
             </div>
         </div>
 
-        {{!-- Methods --}}
-        <div class="methods input-group">
+        {{!-- Attributes --}}
+        <div class="attributes input-group">
             {{#each system.attributes}}
-            <div class="method attribute rollable" data-attribute="{{@key}}">
-                <div class="method-name label">{{this.label}}</div>
+            <div class="input big attribute">
+                <div class="attribute-name rollable label" data-attribute="{{@key}}">{{this.label}}</div>
                 <div class="value">
-                    {{#repeat this.value}}
-                    <div class="bubble filled inverted"></div>
-                    {{/repeat}}
-                    {{#repeat 4 start=this.value}}
-                    <div class="bubble inverted"></div>
-                    {{/repeat}}
+                    <input name="system.attributes.{{@key}}.value" type="number" value="{{this.value}}"
+                        data-dtype="Number" />
                 </div>
             </div>
-            {{#each this.methods}}
-            <div class="method">
-                <input name="system.methods.{{@key}}.used" class="method-used label" type="checkbox" {{checked
-                    this.used}} />
-                <div class="method-name label rollable" data-method="{{@key}}">{{this.label}}</div>
-                {{!-- <input name="system.methods.{{@key}}.value" class="value" type="number" value="{{this.value}}"
-                    data-dtype="Number" /> --}}
-                <div class="value">
-                    {{#repeat this.value}}
-                    <div class="bubble filled"></div>
-                    {{/repeat}}
-                    {{#repeat 4 start=this.value}}
-                    <div class="bubble"></div>
-                    {{/repeat}}
-                </div>
-            </div>
-            {{/each}}
             {{/each}}
         </div>
         {{!-- Fatigue --}}
@@ -99,33 +78,18 @@
             <div class="input big">
                 <div class="label">{{localize "VAGABONDS.Fatigue"}}</div>
                 <div class="value">
-                    {{!-- {{system.fatigue.value}}/{{system.fatigue.max}} --}}
+                    <input name="system.fatigue.value" type="number" value="{{system.fatigue.value}}"
+                        data-dtype="Number" />
+                    <p>/{{system.fatigue.max}}</p>
 
-                    {{#repeat system.fatigue.value}}
+                    {{!-- {{#repeat system.fatigue.value}}
                     <div class="bubble filled fatigue-bubble" fatigue="{{this}}"></div>
                     {{/repeat}}
 
                     {{#repeat system.fatigue.max start=system.fatigue.value}}
                     <div class="bubble fatigue-bubble" fatigue="{{this}}"></div>
-                    {{/repeat}}
+                    {{/repeat}} --}}
 
-                </div>
-            </div>
-            <div class="separator"></div>
-            <div class="input big">
-                <div class="label">{{localize "VAGABONDS.Trauma"}}</div>
-                <div class="value trauma-conditions">
-                    {{#each traumaConditions}}
-                    {{#if this.checked}}
-                    <div class="trauma-condition checked" trauma="{{@key}}" title="{{this.label}}">
-                        {{this.label}}
-                    </div>
-                    {{else}}
-                    <div class="trauma-condition" trauma="{{@key}}" title="{{this.label}}">
-                        {{this.label}}
-                    </div>
-                    {{/if}}
-                    {{/each}}
                 </div>
             </div>
         </div>
@@ -193,7 +157,6 @@
                 <a id="take-damage">{{localize "VAGABONDS.TakeDamage"}}</a>
                 <a id="take-rest">{{localize "VAGABONDS.TakeRest"}}</a>
                 <a id="cast-magic">{{localize "VAGABONDS.CastMagic"}}</a>
-                <a id="end-session">{{localize "VAGABONDS.EndSession"}}</a>
             </div>
         </div>
 

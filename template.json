@@ -19,126 +19,37 @@
             "fatigue": {
                 "min": 0,
                 "value": 0,
-                "max": 0,
-                "bonus": 2
+                "max": 0
             },
-            "methods": {
-                "endure": {
+            "attributes": {
+                "might": {
                     "min": 0,
                     "value": 0,
-                    "max": 4,
-                    "attribute": "might",
-                    "used": false
+                    "max": 5
                 },
-                "force": {
+                "finesse": {
                     "min": 0,
                     "value": 0,
-                    "max": 4,
-                    "attribute": "might",
-                    "used": false
+                    "max": 5
                 },
-                "fight": {
+                "wits": {
                     "min": 0,
                     "value": 0,
-                    "max": 4,
-                    "attribute": "might",
-                    "used": false
+                    "max": 5
                 },
-                "wreck": {
+                "heart": {
                     "min": 0,
                     "value": 0,
-                    "max": 4,
-                    "attribute": "might",
-                    "used": false
+                    "max": 5
                 },
-                "tinker": {
+                "shadow": {
                     "min": 0,
                     "value": 0,
-                    "max": 4,
-                    "attribute": "finesse",
-                    "used": false
-                },
-                "move": {
-                    "min": 0,
-                    "value": 0,
-                    "max": 4,
-                    "attribute": "finesse",
-                    "used": false
-                },
-                "shoot": {
-                    "min": 0,
-                    "value": 0,
-                    "max": 4,
-                    "attribute": "finesse",
-                    "used": false
-                },
-                "conceal": {
-                    "min": 0,
-                    "value": 0,
-                    "max": 4,
-                    "attribute": "finesse",
-                    "used": false
-                },
-                "spy": {
-                    "min": 0,
-                    "value": 0,
-                    "max": 4,
-                    "attribute": "wits",
-                    "used": false
-                },
-                "assess": {
-                    "min": 0,
-                    "value": 0,
-                    "max": 4,
-                    "attribute": "wits",
-                    "used": false
-                },
-                "survive": {
-                    "min": 0,
-                    "value": 0,
-                    "max": 4,
-                    "attribute": "wits",
-                    "used": false
-                },
-                "know": {
-                    "min": 0,
-                    "value": 0,
-                    "max": 4,
-                    "attribute": "wits",
-                    "used": false
-                },
-                "sway": {
-                    "min": 0,
-                    "value": 0,
-                    "max": 4,
-                    "attribute": "heart",
-                    "used": false
-                },
-                "nurse": {
-                    "min": 0,
-                    "value": 0,
-                    "max": 4,
-                    "attribute": "heart",
-                    "used": false
-                },
-                "consort": {
-                    "min": 0,
-                    "value": 0,
-                    "max": 4,
-                    "attribute": "heart",
-                    "used": false
-                },
-                "parley": {
-                    "min": 0,
-                    "value": 0,
-                    "max": 4,
-                    "attribute": "heart",
-                    "used": false
+                    "max": 5
                 }
             },
             "proficiencies": [],
-            "talents": [],
-            "trauma": []
+            "talents": []
         },
         "creature": {
             "difficulty": 0,
